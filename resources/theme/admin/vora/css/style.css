@@ -20648,8 +20648,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 [data-typography="opensans"] {
   font-family: 'Open Sans', sans-serif; }
 
-[data-typography="poppins"] {
-  font-family: 'poppins', sans-serif; }
+[data-typography="sans-serif"] {
+  font-family: 'sans-serif', sans-serif; }
 
 [data-typography="roboto"] {
   font-family: 'Roboto', sans-serif; }

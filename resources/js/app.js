@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import App from './components/AppComponent';
 import routes from './router/routes';
 import Notifications from 'vue-notification';
-
+import store from './store'
 require('./bootstrap');
 
 window.Vue = require('vue').default;
@@ -20,5 +20,6 @@ const router = new Router({
 const app = new Vue({
     el: '#app',
     render: h => h(App),
-    router
+    router,
+    store
 });
