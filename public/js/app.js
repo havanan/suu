@@ -40493,7 +40493,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n    Đéo biết\n")])
+  return _c("div", [_vm._v("\r\n    Đéo biết\r\n")])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -42704,7 +42704,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        Hi, how are you samim?\n                                        "
+              "\r\n                                        Hi, how are you samim?\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("8:40 AM, Today")])
           ])
@@ -42713,7 +42713,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
           _c("div", { staticClass: "msg_cotainer_send" }, [
             _vm._v(
-              "\n                                        Hi Khalid i am good tnx how about you?\n                                        "
+              "\r\n                                        Hi Khalid i am good tnx how about you?\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time_send" }, [
               _vm._v("8:55 AM, Today")
@@ -42738,7 +42738,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        I am good too, thank you for your chat template\n                                        "
+              "\r\n                                        I am good too, thank you for your chat template\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("9:00 AM, Today")])
           ])
@@ -42747,7 +42747,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
           _c("div", { staticClass: "msg_cotainer_send" }, [
             _vm._v(
-              "\n                                        You are welcome\n                                        "
+              "\r\n                                        You are welcome\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time_send" }, [
               _vm._v("9:05 AM, Today")
@@ -42772,7 +42772,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        I am looking for your next templates\n                                        "
+              "\r\n                                        I am looking for your next templates\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("9:07 AM, Today")])
           ])
@@ -42781,7 +42781,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
           _c("div", { staticClass: "msg_cotainer_send" }, [
             _vm._v(
-              "\n                                        Ok, thank you have a good day\n                                        "
+              "\r\n                                        Ok, thank you have a good day\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time_send" }, [
               _vm._v("9:10 AM, Today")
@@ -42806,7 +42806,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        Bye, see you\n                                        "
+              "\r\n                                        Bye, see you\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("9:12 AM, Today")])
           ])
@@ -42822,7 +42822,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        Hi, how are you samim?\n                                        "
+              "\r\n                                        Hi, how are you samim?\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("8:40 AM, Today")])
           ])
@@ -42831,7 +42831,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
           _c("div", { staticClass: "msg_cotainer_send" }, [
             _vm._v(
-              "\n                                        Hi Khalid i am good tnx how about you?\n                                        "
+              "\r\n                                        Hi Khalid i am good tnx how about you?\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time_send" }, [
               _vm._v("8:55 AM, Today")
@@ -42856,7 +42856,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        I am good too, thank you for your chat template\n                                        "
+              "\r\n                                        I am good too, thank you for your chat template\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("9:00 AM, Today")])
           ])
@@ -42865,7 +42865,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
           _c("div", { staticClass: "msg_cotainer_send" }, [
             _vm._v(
-              "\n                                        You are welcome\n                                        "
+              "\r\n                                        You are welcome\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time_send" }, [
               _vm._v("9:05 AM, Today")
@@ -42890,7 +42890,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        I am looking for your next templates\n                                        "
+              "\r\n                                        I am looking for your next templates\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("9:07 AM, Today")])
           ])
@@ -42899,7 +42899,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
           _c("div", { staticClass: "msg_cotainer_send" }, [
             _vm._v(
-              "\n                                        Ok, thank you have a good day\n                                        "
+              "\r\n                                        Ok, thank you have a good day\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time_send" }, [
               _vm._v("9:10 AM, Today")
@@ -42924,7 +42924,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("div", { staticClass: "msg_cotainer" }, [
             _vm._v(
-              "\n                                        Bye, see you\n                                        "
+              "\r\n                                        Bye, see you\r\n                                        "
             ),
             _c("span", { staticClass: "msg_time" }, [_vm._v("9:12 AM, Today")])
           ])
@@ -43197,7 +43197,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "header-left" }, [
       _c("div", { staticClass: "dashboard_bar" }, [
         _vm._v(
-          "\n                                Dashboard\n                            "
+          "\r\n                                Dashboard\r\n                            "
         )
       ])
     ])
@@ -43268,7 +43268,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "timeline-panel" }, [
                 _c("div", { staticClass: "media mr-2 media-info" }, [
                   _vm._v(
-                    "\n                                                        KG\n                                                    "
+                    "\r\n                                                        KG\r\n                                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -43330,7 +43330,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "timeline-panel" }, [
                 _c("div", { staticClass: "media mr-2 media-danger" }, [
                   _vm._v(
-                    "\n                                                        KG\n                                                    "
+                    "\r\n                                                        KG\r\n                                                    "
                   )
                 ]),
                 _vm._v(" "),
@@ -44171,7 +44171,7 @@ var staticRenderFns = [
                   },
                   [
                     _vm._v(
-                      "\n                                                        Daily\n                                                    "
+                      "\r\n                                                        Daily\r\n                                                    "
                     )
                   ]
                 )
@@ -44191,7 +44191,7 @@ var staticRenderFns = [
                   },
                   [
                     _vm._v(
-                      "\n                                                        Weekly\n                                                    "
+                      "\r\n                                                        Weekly\r\n                                                    "
                     )
                   ]
                 )
@@ -44211,7 +44211,7 @@ var staticRenderFns = [
                   },
                   [
                     _vm._v(
-                      "\n                                                        Monthly\n                                                    "
+                      "\r\n                                                        Monthly\r\n                                                    "
                     )
                   ]
                 )
@@ -44366,7 +44366,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "col-6 pl-0" }, [
                   _c("h6", { staticClass: "fs-14" }, [
                     _vm._v(
-                      "Progress\n                                                        "
+                      "Progress\r\n                                                        "
                     ),
                     _c("span", { staticClass: "pull-right font-w600" }, [
                       _vm._v("24%")
@@ -44440,7 +44440,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "col-6 pl-0" }, [
                   _c("h6", { staticClass: "fs-14" }, [
                     _vm._v(
-                      "Progress\n                                                        "
+                      "Progress\r\n                                                        "
                     ),
                     _c("span", { staticClass: "pull-right font-w600" }, [
                       _vm._v("79%")
@@ -44520,7 +44520,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "col-6 pl-0" }, [
                   _c("h6", { staticClass: "fs-14" }, [
                     _vm._v(
-                      "Progress\n                                                        "
+                      "Progress\r\n                                                        "
                     ),
                     _c("span", { staticClass: "pull-right font-w600" }, [
                       _vm._v("36%")
@@ -44594,7 +44594,7 @@ var staticRenderFns = [
                 _c("div", { staticClass: "col-6 pl-0" }, [
                   _c("h6", { staticClass: "fs-14" }, [
                     _vm._v(
-                      "Progress\n                                                        "
+                      "Progress\r\n                                                        "
                     ),
                     _c("span", { staticClass: "pull-right font-w600" }, [
                       _vm._v("79%")
@@ -45259,7 +45259,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Đăng nhập")]
+                      [_vm._v("Đăng nhập nhé")]
                     )
                   ])
                 ])

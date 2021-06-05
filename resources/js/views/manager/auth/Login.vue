@@ -30,7 +30,7 @@
 <!--                                    </div>-->
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn bg-white text-primary btn-block" @click="login()">Đăng nhập</button>
+                                    <button type="button" class="btn bg-white text-primary btn-block" @click="login()">Đăng nhập nhé</button>
                                 </div>
                             </div>
 
