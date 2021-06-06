@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Quản lý Suukids</title>
+    <title> @yield('title') </title>
     <!-- Fonts -->
 {{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
 {{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
@@ -17,8 +17,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('assets/admin/js/lib.js') }}" defer></script>
-
+    @yield('css')
 </head>
 <body>
     <div id="app">
@@ -45,10 +44,10 @@
                 Nav header start
             ***********************************-->
             <div class="nav-header">
-                <a href="index.html" class="brand-logo">
-                    <img class="logo-abbr" src="images/logo.png" alt="">
-                    <img class="logo-compact" src="images/logo-text.png" alt="">
-                    <img class="brand-title" src="images/logo-text.png" alt="">
+                <a href="{{route('dashboard.index')}}" class="brand-logo">
+                    <img class="logo-abbr" src="{{asset('images/logo1.jpg')}}" alt="Suukids">
+{{--                   <span class="logo-compact"> </span>--}}
+                    <span class="brand-title text-blue"> SuuKids Manager</span>
                 </a>
 
                 <div class="nav-control">
@@ -104,42 +103,6 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="dlab-chat-user">
-                                            <div class="d-flex bd-highlight">
-                                                <div class="img_cont">
-                                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
-                                                    <span class="online_icon offline"></span>
-                                                </div>
-                                                <div class="user_info">
-                                                    <span>Alfie Mason</span>
-                                                    <p>Taherah left 7 mins ago</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="dlab-chat-user">
-                                            <div class="d-flex bd-highlight">
-                                                <div class="img_cont">
-                                                    <img src="images/avatar/3.jpg" class="rounded-circle user_img" alt=""/>
-                                                    <span class="online_icon"></span>
-                                                </div>
-                                                <div class="user_info">
-                                                    <span>AharlieKane</span>
-                                                    <p>Sami is online</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="dlab-chat-user">
-                                            <div class="d-flex bd-highlight">
-                                                <div class="img_cont">
-                                                    <img src="images/avatar/4.jpg" class="rounded-circle user_img" alt=""/>
-                                                    <span class="online_icon offline"></span>
-                                                </div>
-                                                <div class="user_info">
-                                                    <span>Athan Jacoby</span>
-                                                    <p>Nargis left 30 mins ago</p>
-                                                </div>
-                                            </div>
-                                        </li>
                                         <li class="name-first-letter">B</li>
                                         <li class="dlab-chat-user">
                                             <div class="d-flex bd-highlight">
@@ -150,30 +113,6 @@
                                                 <div class="user_info">
                                                     <span>Bashid Samim</span>
                                                     <p>Rashid left 50 mins ago</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="dlab-chat-user">
-                                            <div class="d-flex bd-highlight">
-                                                <div class="img_cont">
-                                                    <img src="images/avatar/1.jpg" class="rounded-circle user_img" alt=""/>
-                                                    <span class="online_icon"></span>
-                                                </div>
-                                                <div class="user_info">
-                                                    <span>Breddie Ronan</span>
-                                                    <p>Kalid is online</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="dlab-chat-user">
-                                            <div class="d-flex bd-highlight">
-                                                <div class="img_cont">
-                                                    <img src="images/avatar/2.jpg" class="rounded-circle user_img" alt=""/>
-                                                    <span class="online_icon offline"></span>
-                                                </div>
-                                                <div class="user_info">
-                                                    <span>Ceorge Carson</span>
-                                                    <p>Taherah left 7 mins ago</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -619,5 +558,9 @@
             Main wrapper end
         ***********************************-->
     </div>
+    <script src="{{ asset('assets/admin/js/lib.js') }}" defer></script>
+    @includeIf('layouts.flash_message')
+    @yield('js')
+
 </body>
 </html>

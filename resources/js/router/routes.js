@@ -24,38 +24,14 @@ const routes = [
         component: Dashboard,
         meta :{ layout: Manager},
         name: 'managerDashboard',
-        beforeEnter:(to,from,next) => {
-                    axios.get('/api/user').then(() => {
-                        next()
-                    }).catch(() => {
-                        return next ({name:'managerLogin'})
-                    })
-                },
+        // beforeEnter:(to,from,next) => {
+        //             axios.get('/api/v1/manager/current-user').then(() => {
+        //                 next()
+        //             }).catch(() => {
+        //                 return next ({name:'managerLogin'})
+        //             })
+        //         },
     },
-    // {
-    //     path: '/auth/login',
-    //     component: LoginComponent,
-    //     name: 'adminLogin',
-    // },
-    // {
-    //     path: '/manager',
-    //     component: DashboardComponent,
-    //     name: 'adminDashboard',
-    //     beforeEnter:(to,from,next) => {
-    //         axios.get('/api/authenticated').then(() => {
-    //             next()
-    //         }).catch(() => {
-    //             return next ({name:'adminLogin'})
-    //         })
-    //     },
-    //     children : [
-    //         {
-    //             path: 'user',
-    //             component: AdminUserListComponent,
-    //             name: 'adminUser',
-    //         },
-    //     ],
-    // },
 ];
 
 export default routes;

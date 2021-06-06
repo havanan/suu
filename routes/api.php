@@ -14,17 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
 Route::group([
-    'prefix' => 'manager'
+    'prefix' => 'v1'
 ],function (){
-    Route::post('login', 'AuthController@login');
     Route::group([
-        'middleware' => 'auth:sanctum'
+        'prefix' => 'manager'
     ],function (){
-        Route::get('current-user', 'UserController@getCurrentUser');
+        Route::post('login', 'AuthController@login');
+        Route::group([
+            'middleware' => 'auth:sanctum'
+        ],function (){
+            Route::get('current-user', 'UserController@getCurrentUser');
+        });
     });
 });
 
