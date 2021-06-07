@@ -20,7 +20,7 @@
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx package'></i>
+                <div class="parent-icon"><i class='bx bx-package'></i>
                 </div>
                 <div class="menu-title">Sản phẩm</div>
             </a>
@@ -62,8 +62,8 @@
                 <li>
                     <a href="{{route('user.index')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách</a>
                     <a href="{{route('user.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
-                    <a href="{{route('user.export')}}"><i class="bx bx-right-arrow-alt"></i>Nhóm Nv</a>
-                    <a href="{{route('user.export_list')}}"><i class="bx bx-right-arrow-alt"></i>Quyền</a>
+                    <a href="{{route('user.group')}}"><i class="bx bx-right-arrow-alt"></i>Nhóm Nv</a>
+                    <a href="{{route('user.role')}}"><i class="bx bx-right-arrow-alt"></i>Quyền</a>
 {{--                    <a href="{{route('user.available')}}"><i class="bx bx-right-arrow-alt"></i>Tồn kho</a>--}}
                 </li>
             </ul>

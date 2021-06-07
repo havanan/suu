@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * Class BaseRepository.
  *
@@ -64,12 +66,25 @@ abstract class BaseRepository implements RepositoryContract
      * @var array
      */
     protected $scopes = [];
+    public function __construct(Model $model)
 
+    {
+        $this->originalModel = $model;
+        $this->makeModel();
+    }
+    /**
+     * @return Model
+     */
+    public function makeModel()
+    {
+        return $this->model = $this->originalModel;
+    }
     /**
      * Get all the model records in the database.
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
+
     public function all()
     {
         $this->newQuery()->eagerLoad();

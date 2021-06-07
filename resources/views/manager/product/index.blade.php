@@ -1,10 +1,11 @@
 @extends('layouts.admin')
 
-@section('title') Tổng quát @endsection
+@section('title') Danh sách sản phẩm @endsection
 @section('content')
-   <div class="row">
-       <div class="container-fluid">
-           <h3>Hello: {{auth()->user()->name}}</h3>
-       </div>
-   </div>
+    <div class="row">
+        <div class="container-fluid">
+            <h3>Danh sách sản phẩm</h3>
+            <product-list></product-list>
+        </div>
+    </div>
 @endsection

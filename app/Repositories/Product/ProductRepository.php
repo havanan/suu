@@ -4,7 +4,18 @@
 namespace App\Repositories\Product;
 
 
-class ProductReposotories
-{
+use App\Models\Models\Product;
+use App\Repositories\BaseRepository;
 
+class ProductRepository extends BaseRepository implements ProductInterface
+{
+    public function __construct(Product $modal)
+    {
+        parent::__construct($modal);
+    }
+    public function getList($params)
+    {
+        $data = $this->query->get();
+        return $data;
+    }
 }
