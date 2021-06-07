@@ -1,3 +1,8 @@
+@if($errors->has('error'))
+    <p class="text-danger">
+        {{ $errors->first('error') }}
+    </p>
+@endif
 <script>
     @if($message = Session::get('error'))
         toastr.error('{{$message}}');

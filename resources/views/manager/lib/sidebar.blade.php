@@ -1,148 +1,90 @@
-<div class="dlabnav">
-    <div class="dlabnav-scroll">
-        <ul class="metismenu" id="menu">
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-networking"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contacts.html">Contacts</a></li>
-                    <li><a href="kanban.html">Kanban</a></li>
-                    <li><a href="calendar.html">Calendar</a></li>
-                    <li><a href="messages.html">Messages</a></li>
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-television"></i>
-                    <span class="nav-text">Apps</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="app-profile.html">Profile</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                        <ul aria-expanded="false">
-                            <li><a href="email-compose.html">Compose</a></li>
-                            <li><a href="email-inbox.html">Inbox</a></li>
-                            <li><a href="email-read.html">Read</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="app-calender.html">Calendar</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                        <ul aria-expanded="false">
-                            <li><a href="ecom-product-grid.html">Product Grid</a></li>
-                            <li><a href="ecom-product-list.html">Product List</a></li>
-                            <li><a href="ecom-product-detail.html">Product Details</a></li>
-                            <li><a href="ecom-product-order.html">Order</a></li>
-                            <li><a href="ecom-checkout.html">Checkout</a></li>
-                            <li><a href="ecom-invoice.html">Invoice</a></li>
-                            <li><a href="ecom-customers.html">Customers</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-controls-3"></i>
-                    <span class="nav-text">Charts</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="chart-flot.html">Flot</a></li>
-                    <li><a href="chart-morris.html">Morris</a></li>
-                    <li><a href="chart-chartjs.html">Chartjs</a></li>
-                    <li><a href="chart-chartist.html">Chartist</a></li>
-                    <li><a href="chart-sparkline.html">Sparkline</a></li>
-                    <li><a href="chart-peity.html">Peity</a></li>
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-internet"></i>
-                    <span class="nav-text">Bootstrap</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="ui-accordion.html">Accordion</a></li>
-                    <li><a href="ui-alert.html">Alert</a></li>
-                    <li><a href="ui-badge.html">Badge</a></li>
-                    <li><a href="ui-button.html">Button</a></li>
-                    <li><a href="ui-modal.html">Modal</a></li>
-                    <li><a href="ui-button-group.html">Button Group</a></li>
-                    <li><a href="ui-list-group.html">List Group</a></li>
-                    <li><a href="ui-media-object.html">Media Object</a></li>
-                    <li><a href="ui-card.html">Cards</a></li>
-                    <li><a href="ui-carousel.html">Carousel</a></li>
-                    <li><a href="ui-dropdown.html">Dropdown</a></li>
-                    <li><a href="ui-popover.html">Popover</a></li>
-                    <li><a href="ui-progressbar.html">Progressbar</a></li>
-                    <li><a href="ui-tab.html">Tab</a></li>
-                    <li><a href="ui-typography.html">Typography</a></li>
-                    <li><a href="ui-pagination.html">Pagination</a></li>
-                    <li><a href="ui-grid.html">Grid</a></li>
-
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-heart"></i>
-                    <span class="nav-text">Plugins</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="uc-select2.html">Select 2</a></li>
-                    <li><a href="uc-nestable.html">Nestedable</a></li>
-                    <li><a href="uc-noui-slider.html">Noui Slider</a></li>
-                    <li><a href="uc-sweetalert.html">Sweet Alert</a></li>
-                    <li><a href="uc-toastr.html">Toastr</a></li>
-                    <li><a href="map-jqvmap.html">Jqv Map</a></li>
-                    <li><a href="uc-lightgallery.html">Light Gallery</a></li>
-                </ul>
-            </li>
-            <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                    <i class="flaticon-381-settings-2"></i>
-                    <span class="nav-text">Widget</span>
-                </a>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-notepad"></i>
-                    <span class="nav-text">Forms</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="form-element.html">Form Elements</a></li>
-                    <li><a href="form-wizard.html">Wizard</a></li>
-                    <li><a href="form-editor-summernote.html">Summernote</a></li>
-                    <li><a href="form-pickers.html">Pickers</a></li>
-                    <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-network"></i>
-                    <span class="nav-text">Table</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                    <li><a href="table-datatable-basic.html">Datatable</a></li>
-                </ul>
-            </li>
-            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-layer-1"></i>
-                    <span class="nav-text">Pages</span>
-                </a>
-                <ul aria-expanded="false">
-                    <li><a href="page-register.html">Register</a></li>
-                    <li><a href="page-login.html">Login</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                        <ul aria-expanded="false">
-                            <li><a href="page-error-400.html">Error 400</a></li>
-                            <li><a href="page-error-403.html">Error 403</a></li>
-                            <li><a href="page-error-404.html">Error 404</a></li>
-                            <li><a href="page-error-500.html">Error 500</a></li>
-                            <li><a href="page-error-503.html">Error 503</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                </ul>
-            </li>
-        </ul>
-        <a class="add-menu-sidebar d-block" href="javascript:void(0)"  data-toggle="modal" data-target="#addOrderModalside" >+ New Project</a>
-        <div class="copyright">
-            <p><strong>Vora Saas Admin Dashboard</strong> © 2020 All Rights Reserved</p>
-            <p>Made with <span class="heart"></span> by DexignLab</p>
+<div class="sidebar-wrapper" data-simplebar="true">
+    <div class="sidebar-header">
+        <div>
+            <img src="{{asset('images/suu-kids.png')}}" class="logo-icon" alt="logo icon">
+        </div>
+        <div>
+            <h4 class="logo-text">SuuKids</h4>
+        </div>
+        <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
         </div>
     </div>
+    <!--navigation-->
+    <ul class="metismenu" id="menu">
+        <li>
+            <a href="{{route('dashboard.index')}}">
+                <div class="parent-icon"> <i class="bx bx-home-circle"></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx package'></i>
+                </div>
+                <div class="menu-title">Sản phẩm</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{route('product.list')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách</a>
+                </li>
+                <li>
+                    <a href="{{route('product.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
+                </li>
+                <li>
+                    <a href="{{route('product.unit')}}"><i class="bx bx-right-arrow-alt"></i>Đơn vị</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Kho</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{route('stock.import')}}"><i class="bx bx-right-arrow-alt"></i>Nhập kho</a>
+                    <a href="{{route('stock.import_list')}}"><i class="bx bx-right-arrow-alt"></i>Phiếu nhập kho</a>
+                    <a href="{{route('stock.export')}}"><i class="bx bx-right-arrow-alt"></i>Xuất kho</a>
+                    <a href="{{route('stock.export_list')}}"><i class="bx bx-right-arrow-alt"></i>Phiếu xuất kho</a>
+                    <a href="{{route('stock.available')}}"><i class="bx bx-right-arrow-alt"></i>Tồn kho</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx user"></i>
+                </div>
+                <div class="menu-title">Nhân viên</div>
+            </a>
+            <ul>
+                <li>
+                    <a href="{{route('user.index')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách</a>
+                    <a href="{{route('user.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
+                    <a href="{{route('user.export')}}"><i class="bx bx-right-arrow-alt"></i>Nhóm Nv</a>
+                    <a href="{{route('user.export_list')}}"><i class="bx bx-right-arrow-alt"></i>Quyền</a>
+{{--                    <a href="{{route('user.available')}}"><i class="bx bx-right-arrow-alt"></i>Tồn kho</a>--}}
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart'></i>
+                </div>
+                <div class="menu-title">Bán hàng</div>
+            </a>
+            <ul>
+                <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Products</a>
+                </li>
+                <li> <a href="ecommerce-products-details.html"><i class="bx bx-right-arrow-alt"></i>Product Details</a>
+                </li>
+                <li> <a href="ecommerce-add-new-products.html"><i class="bx bx-right-arrow-alt"></i>Add New Products</a>
+                </li>
+                <li> <a href="ecommerce-orders.html"><i class="bx bx-right-arrow-alt"></i>Orders</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!--end navigation-->
 </div>
