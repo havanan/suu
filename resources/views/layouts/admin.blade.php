@@ -28,7 +28,19 @@
         <!--start page wrapper -->
         <div class="page-wrapper">
             <div class="page-content">
-                @yield('content')
+                <!--breadcrumb-->
+                @includeIf('manager.lib.breadcrumb')
+                <!--end breadcrumb-->
+                <div class="card">
+                    <div class="card-body p-4">
+{{--                        <h5 class="card-title">Add New Product</h5>--}}
+{{--                        <hr/>--}}
+                        <div class="form-body mt-4">
+                            @yield('content')
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!--end page wrapper -->

@@ -22,13 +22,14 @@ class ProductController extends Controller
         return $data;
     }
     public function create(){
-        return view('manager.product.create');
+        $id = null;
+        return view('manager.product.create',compact('id'));
     }
     public function save(CreateRequest $request){
         return view('manager.product.create');
     }
     public function edit($id){
-        return view('manager.product.create');
+        return view('manager.product.create',compact('id'));
     }
     public function update(CreateRequest $request){
         return view('manager.product.create');

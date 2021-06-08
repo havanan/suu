@@ -54,7 +54,7 @@
         </li>
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="bx user"></i>
+                <div class="parent-icon"><i class="bx bx-user"></i>
                 </div>
                 <div class="menu-title">Nhân viên</div>
             </a>

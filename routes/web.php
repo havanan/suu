@@ -30,7 +30,7 @@ Route::prefix('manager')->group(function (){
         ],function (){
             Route::get('/',         [ProductController::class,'index'])->name('product.list');
             Route::get('get-list',  [ProductController::class,'getList'])->name('product.getList');
-            Route::get('tao-moi',   [ProductController::class,'index'])->name('product.create');
+            Route::get('tao-moi',   [ProductController::class,'create'])->name('product.create');
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
             Route::get('don-vi',    [ProductController::class,'unit'])->name('product.unit');

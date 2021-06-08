@@ -6,6 +6,8 @@ import App from './components/AppComponent';
 import TableComponent from "./components/TableComponent";
 import Notifications from 'vue-notification';
 import ProductList from "./components/Product/ProductList";
+import FromProduct from "./components/Product/FromProduct";
+
 import store from './store'
 require('./bootstrap');
 
@@ -15,6 +17,7 @@ window.Vue = require('vue').default;
 Vue.use(Notifications);
 Vue.component('TableComponent',TableComponent);
 Vue.component('ProductList',ProductList);
+Vue.component('FromProduct',FromProduct);
 
 // axios.defaults.withCredentials = true
 // axios.defaults.baseURL = process.env.APP_URL + '/api/v1/manager/'
