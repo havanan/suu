@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('breadcrumb')
-    <div class="breadcrumb-title pe-3">Sản phẩm</div>
+    <div class="breadcrumb-title pe-3">Đơn vị</div>
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0" style="background-color: transparent">
@@ -11,12 +11,11 @@
         </nav>
     </div>
 @endsection
-@section('title') Danh sách sản phẩm @endsection
+@section('title') Danh sách đơn vị @endsection
 @section('content')
     <div class="row">
         <div class="container-fluid">
-            <h3>Danh sách sản phẩm</h3>
-            <product-list></product-list>
+            <unit-list></unit-list>
         </div>
     </div>
 @endsection

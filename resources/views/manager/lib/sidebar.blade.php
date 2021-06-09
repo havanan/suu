@@ -32,7 +32,7 @@
                     <a href="{{route('product.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
                 </li>
                 <li>
-                    <a href="{{route('product.unit')}}"><i class="bx bx-right-arrow-alt"></i>Đơn vị</a>
+                    <a href="{{route('product_unit.index')}}"><i class="bx bx-right-arrow-alt"></i>Đơn vị</a>
                 </li>
             </ul>
         </li>

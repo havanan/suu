@@ -1,6 +1,8 @@
 @extends('layouts.admin')
-
-@section('title') Tổng quát @endsection
+@section('breadcrumb')
+    <div class="breadcrumb-title pe-3">Dashboard</div>
+@endsection
+@section('title') Dashboard @endsection
 @section('content')
    <div class="row">
        <div class="container-fluid">
