@@ -16,7 +16,8 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
         $check = Auth::attempt($credentials);
         if (!$check) {
-            return back()->with('error','Sai tên đăng nhập hoặc mật khẩu');
+            return back()->withErrors('Sai tên đăng nhập hoặc mật khẩu');
+//                ->with('error','Sai tên đăng nhập hoặc mật khẩu');
         }
         return redirect()->route('dashboard.index');
     }

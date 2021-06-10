@@ -8,6 +8,9 @@
                     <h3 class="">Đăng Nhập</h3>
                 </div>
                 <div class="form-body">
+                        @if($errors->any())
+                            <p class="text-danger"><strong>{{$errors->first()}}</strong></p>
+                        @endif
                         <form class="row g-3" method="post" action="{{route('manager.login')}}">
                             {{csrf_field()}}
                         <div class="col-12">

@@ -34,6 +34,8 @@ Route::prefix('manager')->group(function (){
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
             Route::get('don-vi',    [ProductController::class,'unit'])->name('product.unit');
+            Route::get('get-property',    [ProductController::class,'getProperty']);
+
             Route::post('cap-nhat', [ProductController::class,'update'])->name('product.update');
             Route::post('tao-moi',  [ProductController::class,'save'])->name('product.save');
         });
@@ -60,8 +62,7 @@ Route::prefix('manager')->group(function (){
             Route::get('phieu-nhap-hang', [StockController::class,'importList'])->name('stock.import_list');
             Route::get('xuat-hang', [StockController::class,'export'])->name('stock.export');
             Route::get('phieu-xuat-hang', [StockController::class,'exportList'])->name('stock.export_list');
-            Route::get('tom-kho', [StockController::class,'available'])->name('stock.available');
-
+            Route::get('ton-kho', [StockController::class,'available'])->name('stock.available');
             Route::get('xoa/{id}',  [StockController::class,'delete'])->name('stock.delete');
             Route::post('cap-nhat', [StockController::class,'update'])->name('stock.update');
             Route::post('tao-moi',  [StockController::class,'save'])->name('stock.save');

@@ -24,11 +24,7 @@
                     <div class="mb-4 text-center">
                         <img src="{{asset('images\logo.png')}}" width="180" alt="" />
                     </div>
-                    @if($errors->has('error'))
-                        <p class="text-danger">
-                            {{ $errors->first('error') }}
-                        </p>
-                    @endif
+
                     @yield('content')
                 </div>
             </div>

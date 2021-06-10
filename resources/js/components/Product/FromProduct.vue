@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-5">
       <div class="border border-3 p-4 rounded">
         <div class="mb-3">
           <label for="inputProductTitle" class="form-label">Tên sản phẩm</label>
@@ -25,8 +25,8 @@
               <input type="number" class="form-control" id="inputCostPerPrice" v-model="formData.price_disount">
             </div>
             <div class="col-md-6">
-              <label for="inputStarPoints" class="form-label">Số lượng</label>
-              <input type="number" class="form-control" id="inputStarPoints" v-model="formData.total">
+              <label for="inputStarPoints" class="form-label">Tổng số lượng</label>
+              <input type="number" class="form-control" id="inputStarPoints" v-model="formData.total" readonly>
             </div>
           </div>
         </div>
@@ -36,48 +36,36 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-7">
       <div class="border border-3 p-4 rounded">
         <div class="row g-3">
-          <div class="col-12">
+          <div class="col-6">
             <div class="mb-3">
               <label for="inputProductDescription" class="form-label">Ảnh sản phẩm</label>
               <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-model="formData.images"></vue-dropzone>
             </div>
           </div>
-          <div class="col-12">
-            <label for="inputProductType" class="form-label">Trạng thái</label>
-            <select class="form-select" id="inputProductType" v-model="formData.status">
-              <option></option>
-              <option value="1">Kích hoạt</option>
-              <option value="2">Ẩn</option>
-            </select>
+          <div class="col-6">
+            <label  class="form-label">Trạng thái</label>
+            <v-select :options="configs.status" v-model="formData.status"></v-select>
           </div>
-          <div class="col-12">
-            <label for="inputVendor" class="form-label">Vendor</label>
-            <select class="form-select" id="inputVendor">
-              <option></option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+        </div>
+        <div class="row g-3">
+          <div class="col-4">
+            <label  class="form-label">Đơn vị</label>
+            <v-select :options="configs.status" v-model="formData.unit"></v-select>
           </div>
-          <div class="col-12">
-            <label for="inputCollection" class="form-label">Collection</label>
-            <select class="form-select" id="inputCollection">
-              <option></option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+          <div class="col-4">
+            <label class="form-label">Màu sắc</label>
+            <v-select :options="configs.status" v-model="formData.color"></v-select>
           </div>
-          <div class="col-12">
-            <label for="inputProductTags" class="form-label">Product Tags</label>
-            <input type="text" class="form-control" id="inputProductTags" placeholder="Enter Product Tags">
+          <div class="col-4">
+            <label class="form-label">Size</label>
+            <v-select :options="configs.status" v-model="formData.size"></v-select>
           </div>
           <div class="col-12">
             <div class="d-grid">
-              <button type="button" class="btn btn-primary">Save Product</button>
+              <button type="button" class="btn btn-primary">Lưu</button>
             </div>
           </div>
 
@@ -90,13 +78,15 @@
 <script>
 import vue2Dropzone from 'vue2-dropzone';
 import 'vue2-dropzone/dist/vue2Dropzone.min.css';
-
 export default {
   name: "FromProduct",
   components: {
     vueDropzone: vue2Dropzone
   },
   props:['id'],
+  mounted() {
+    this.getProductProperty()
+  },
   data: function () {
     return {
       dropzoneOptions: {
@@ -104,6 +94,17 @@ export default {
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         headers: { "My-Awesome-Header": "header value" }
+      },
+      configs:{
+        status:[{
+          code:0,
+            label:'Ngừng kinh doanh'
+        },
+          {
+            code:1,
+            label:'Kinh doanh'
+          },
+        ]
       },
       formData:{
         name:'',
@@ -117,10 +118,12 @@ export default {
         status:0
       }
     }
+  },
+  methods:{
+    getProductProperty(){
+      console.log('cái lòn má')
+      this.$axios.get('san-pham/get-property');
+    }
   }
 }
 </script>
-
-<style scoped>
-
-</style>

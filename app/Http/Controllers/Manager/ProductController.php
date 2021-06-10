@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Manager;
 
+use App\Helpers\ResponsesApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateRequest;
 use App\Services\Product\ProductService;
@@ -36,5 +37,9 @@ class ProductController extends Controller
     }
     public function delete($id){
 
+    }
+    public function getProperty(){
+        $globals = new ResponsesApi();
+        return $globals->resSuccessData($this->productService->getProperty());
     }
 }
