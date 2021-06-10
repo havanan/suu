@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Manager\AuthController as ManagerAuthController;
 use App\Http\Controllers\Manager\DashBoardController;
 use App\Http\Controllers\Manager\ProductController;
+use App\Http\Controllers\Manager\ProductUnitController;
 use App\Http\Controllers\Manager\BillController;
 use App\Http\Controllers\Manager\CustomerController;
 use App\Http\Controllers\Manager\StockController;
@@ -33,11 +34,21 @@ Route::prefix('manager')->group(function (){
             Route::get('tao-moi',   [ProductController::class,'create'])->name('product.create');
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
-            Route::get('don-vi',    [ProductController::class,'unit'])->name('product.unit');
-            Route::get('get-property',    [ProductController::class,'getProperty']);
 
             Route::post('cap-nhat', [ProductController::class,'update'])->name('product.update');
             Route::post('tao-moi',  [ProductController::class,'save'])->name('product.save');
+            Route::group([
+                    'prefix' => 'don-vi'
+            ],function (){
+                Route::get('/',          [ProductUnitController::class,'index'])->name('product_unit.index');
+                Route::get('tao-moi',    [ProductUnitController::class,'create'])->name('product_unit.create');
+                Route::get('sua/{id}',   [ProductUnitController::class,'edit'])->name('product_unit.edit');
+                Route::get('xoa/{id}',   [ProductUnitController::class,'delete'])->name('product_unit.delete');
+                Route::get('get-list',   [ProductUnitController::class,'getList'])->name('product_unit.getList');
+
+                Route::post('cap-nhat',  [ProductUnitController::class,'update'])->name('product_unit.update');
+                Route::post('tao-moi',   [ProductUnitController::class,'save'])->name('product_unit.save');
+            });
         });
         Route::group([
             'prefix' => 'nhan-vien'
@@ -62,7 +73,8 @@ Route::prefix('manager')->group(function (){
             Route::get('phieu-nhap-hang', [StockController::class,'importList'])->name('stock.import_list');
             Route::get('xuat-hang', [StockController::class,'export'])->name('stock.export');
             Route::get('phieu-xuat-hang', [StockController::class,'exportList'])->name('stock.export_list');
-            Route::get('ton-kho', [StockController::class,'available'])->name('stock.available');
+            Route::get('tom-kho', [StockController::class,'available'])->name('stock.available');
+
             Route::get('xoa/{id}',  [StockController::class,'delete'])->name('stock.delete');
             Route::post('cap-nhat', [StockController::class,'update'])->name('stock.update');
             Route::post('tao-moi',  [StockController::class,'save'])->name('stock.save');
