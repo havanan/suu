@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * Modified from: https://github.com/kylenoland/laravel-base-repository
  */
-abstract class BaseRepository implements RepositoryContract
+abstract class BaseBaseRepository implements BaseRepositoryInterface
 {
     /**
      * The repository model.

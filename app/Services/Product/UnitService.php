@@ -4,18 +4,16 @@
 namespace App\Services\Product;
 
 
-use App\Repositories\Product\Unit\ProductUnitRepository;
+use App\Repositories\Product\Unit\ProductUnitInterface;
 use App\Services\BaseService;
 
 class UnitService extends BaseService
 {
-    private $_repo;
-
-    public function __construct(ProductUnitRepository $repository)
+    public function __construct(ProductUnitInterface $repository)
     {
-        $this->_repo = $repository;
+        parent::__construct($repository);
     }
     public function getList($params){
-        return $this->_repo->getList($params);
+        return $this->repository->getList($params);
     }
 }

@@ -5,9 +5,9 @@ namespace App\Repositories\Product;
 
 
 use App\Models\Product;
-use App\Repositories\BaseRepository;
+use App\Repositories\BaseBaseRepository;
 
-class ProductRepository extends BaseRepository implements ProductInterface
+class ProductRepository extends BaseBaseRepository implements ProductInterface
 {
     public function __construct(Product $modal)
     {
