@@ -5,9 +5,9 @@ namespace App\Repositories\Product;
 
 
 use App\Models\Product;
-use App\Repositories\BaseRepository;
+use App\Repositories\BaseBaseRepository;
 
-class ProductRepository extends BaseRepository implements ProductInterface
+class ProductRepository extends BaseBaseRepository implements ProductInterface
 {
     public function __construct(Product $modal)
     {
@@ -15,7 +15,12 @@ class ProductRepository extends BaseRepository implements ProductInterface
     }
     public function getList($params)
     {
-        $data = $this->query->get();
+        $data = $this->model->orderBy('id');
         return $data;
+    }
+
+    public function insert($params)
+    {
+        // TODO: Implement insert() method.
     }
 }

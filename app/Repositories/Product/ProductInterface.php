@@ -4,7 +4,9 @@
 namespace App\Repositories\Product;
 
 
-interface ProductInterface extends \App\Repositories\RepositoryContract
+use App\Repositories\BaseRepositoryInterface;
+
+interface ProductInterface extends BaseRepositoryInterface
 {
     public function getList($params);
 }

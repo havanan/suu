@@ -5,18 +5,16 @@ namespace App\Repositories\Product\Unit;
 
 
 use App\Models\ProductUnit;
-use App\Repositories\BaseRepository;
+use App\Repositories\BaseBaseRepository;
 
-class ProductUnitRepository extends BaseRepository
+class ProductUnitRepository extends BaseBaseRepository implements ProductUnitInterface
 {
-    protected $_model;
     public function __construct(ProductUnit $modal)
     {
-        $this->_model = $modal;
+        parent::__construct($modal);
     }
     public function getList($params)
     {
-        $data = $this->_model->query()->paginate(10);
-        return $data;
+        return $this->getModel()->paginate(10);
     }
 }
