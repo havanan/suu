@@ -17,4 +17,7 @@ class ProductUnitRepository extends BaseBaseRepository implements ProductUnitInt
     {
         return $this->getModel()->paginate(10);
     }
+    public function getAll(){
+        return $this->model->select('name as label','id as code')->get()->toArray();
+    }
 }

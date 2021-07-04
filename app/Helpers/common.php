@@ -14,6 +14,7 @@ function paging($items, $page = Globals::CURRENT_PAGE, $perPage = Globals::PER_P
     $result = [
             'items' => $items,
             'currentPage' => $page,
+            'perPage' => $perPage,
             'pages' => $allPage,
             'total' => $total
     ];

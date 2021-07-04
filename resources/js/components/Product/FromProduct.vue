@@ -39,29 +39,33 @@
     <div class="col-lg-7">
       <div class="border border-3 p-4 rounded">
         <div class="row g-3">
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <div class="mb-3">
               <label for="inputProductDescription" class="form-label">Ảnh sản phẩm</label>
-              <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions" v-model="formData.images"></vue-dropzone>
+              <vue-dropzone ref="myVueDropzone"
+                            id="dropzone"
+                            :options="dropzoneOptions"
+                            @vdropzone-complete="afterComplete"
+              ></vue-dropzone>
             </div>
           </div>
-          <div class="col-6">
+          <div class="col-md-6 col-sm-12">
             <label  class="form-label">Trạng thái</label>
             <v-select :options="configs.status" v-model="formData.status"></v-select>
           </div>
         </div>
         <div class="row g-3">
-          <div class="col-4">
+          <div class="col-md-4 col-sm-12">
             <label  class="form-label">Đơn vị</label>
-            <v-select :options="configs.status" v-model="formData.unit"></v-select>
+            <v-select :options="configs.units" v-model="formData.unit"></v-select>
           </div>
-          <div class="col-4">
+          <div class="col-md-4 col-sm-12">
             <label class="form-label">Màu sắc</label>
-            <v-select :options="configs.status" v-model="formData.color"></v-select>
+            <v-select :options="configs.colors" v-model="formData.color"></v-select>
           </div>
-          <div class="col-4">
+          <div class="col-md-4 col-sm-12">
             <label class="form-label">Size</label>
-            <v-select :options="configs.status" v-model="formData.size"></v-select>
+            <v-select :options="configs.sizes" v-model="formData.size"></v-select>
           </div>
           <div class="col-12">
             <div class="d-grid">
@@ -76,13 +80,8 @@
 </template>
 
 <script>
-import vue2Dropzone from 'vue2-dropzone';
-import 'vue2-dropzone/dist/vue2Dropzone.min.css';
 export default {
   name: "FromProduct",
-  components: {
-    vueDropzone: vue2Dropzone
-  },
   props:['id'],
   mounted() {
     this.getProductProperty()
@@ -90,21 +89,17 @@ export default {
   data: function () {
     return {
       dropzoneOptions: {
-        url: 'https://httpbin.org/post',
+        url: '/manager/san-pham/upload-image',
         thumbnailWidth: 150,
-        maxFilesize: 0.5,
-        headers: { "My-Awesome-Header": "header value" }
+        maxFilesize: 5,
+        addRemoveLinks: true,
+        headers: { 'x-csrf-token': document.head.querySelector("[name=csrf-token]").content }
       },
       configs:{
-        status:[{
-          code:0,
-            label:'Ngừng kinh doanh'
-        },
-          {
-            code:1,
-            label:'Kinh doanh'
-          },
-        ]
+        status:[],
+        sizes:[],
+        colors:[],
+        units:[]
       },
       formData:{
         name:'',
@@ -115,14 +110,23 @@ export default {
         total:0,
         description:'',
         images:null,
-        status:0
+        status:0,
+        unit:null,
+        color:0,
+        size:0
       }
     }
   },
   methods:{
-    getProductProperty(){
-      console.log('cái lòn má')
-      this.$axios.get('san-pham/get-property');
+  async  getProductProperty(){
+    const vm = this;
+     const res = await axios.get('/manager/san-pham/get-property');
+      if(res.data && res.data.data) {
+        vm.configs = res.data.data;
+      }
+    },
+    afterComplete (file) {
+    console.log(file);
     }
   }
 }

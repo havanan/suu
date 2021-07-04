@@ -15,12 +15,11 @@ class ProductRepository extends BaseBaseRepository implements ProductInterface
     }
     public function getList($params)
     {
-        $data = $this->model->orderBy('id');
-        return $data;
-    }
 
-    public function insert($params)
-    {
-        // TODO: Implement insert() method.
+        $data = $this->model->orderBy('id');
+        if (isset($params['keyword']) && $params['keyword'] != null) {
+            $data->where('name','like','%'.$params['keyword'].'%');
+        }
+        return $data;
     }
 }

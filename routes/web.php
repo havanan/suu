@@ -27,14 +27,16 @@ Route::prefix('manager')->group(function (){
         Route::get('/',             [DashBoardController::class,'index'])->name('dashboard.index');
 
         Route::group([
-            'prefix' => 'sam-pham'
+            'prefix' => 'san-pham'
         ],function (){
             Route::get('/',         [ProductController::class,'index'])->name('product.list');
             Route::get('get-list',  [ProductController::class,'getList'])->name('product.getList');
+            Route::get('get-property',  [ProductController::class,'getProperty'])->name('product.getProperty');
             Route::get('tao-moi',   [ProductController::class,'create'])->name('product.create');
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
 
+            Route::post('upload-image', [ProductController::class,'uploadImage'])->name('product.uploadImage');
             Route::post('cap-nhat', [ProductController::class,'update'])->name('product.update');
             Route::post('tao-moi',  [ProductController::class,'save'])->name('product.save');
             Route::group([

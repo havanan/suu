@@ -24,13 +24,6 @@ const routes = [
         component: Dashboard,
         meta :{ layout: Manager},
         name: 'managerDashboard',
-        // beforeEnter:(to,from,next) => {
-        //             axios.get('/api/v1/manager/current-user').then(() => {
-        //                 next()
-        //             }).catch(() => {
-        //                 return next ({name:'managerLogin'})
-        //             })
-        //         },
     },
 ];
 
