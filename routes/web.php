@@ -18,7 +18,7 @@ Route::get('/', function () {
 //Auth::routes();
 
 Route::prefix('manager')->group(function (){
-    Route::get('login',             [ManagerAuthController::class,'login'])->name('manager.login_form');
+    Route::get('login',             [ManagerAuthController::class,'login'])->name('login');
     Route::post('login',            [ManagerAuthController::class,'postLogin'])->name('manager.login');
     Route::group([
         'middleware' => 'auth'
