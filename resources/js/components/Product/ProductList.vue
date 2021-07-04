@@ -1,5 +1,5 @@
 <template>
-  <table-component :fields="fields" :api-url="apiUrl"></table-component>
+  <div>abcd1234</div>
 </template>
 
 <script>
