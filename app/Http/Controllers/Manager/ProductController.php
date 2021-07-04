@@ -45,7 +45,7 @@ class ProductController extends Controller
     }
     public function uploadImage(UploadImageRequest $request){
         $file = $request->file('file');
-        
+
         return [
                 'name' => $file->getClientOriginalName(),
              'size' => $file->getSize()
