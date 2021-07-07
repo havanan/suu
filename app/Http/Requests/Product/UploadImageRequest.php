@@ -32,7 +32,7 @@ class UploadImageRequest extends FormRequest
         return [
                 'file.required' => 'File upload không được để trống',
                 'file.max' => 'File upload không được vượt quá 5Mb',
-                'file.mimes' => 'File upload phải là định dạng :mimes',
+                'file.mimes' => 'File upload phải là định dạng: jpeg,jpg,png',
 
         ];
     }

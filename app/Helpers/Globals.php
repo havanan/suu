@@ -17,5 +17,6 @@ class Globals
     const PER_PAGE_MAX = 9999;
     const MEDIA_IMAGE = 0;
     const MEDIA_VIDEO = 1;
+    const ACTIVE = 1;
 
 }

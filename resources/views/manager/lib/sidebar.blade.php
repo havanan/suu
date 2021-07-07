@@ -29,6 +29,9 @@
                     <a href="{{route('product.list')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách</a>
                 </li>
                 <li>
+                    <a href="{{route('product.list')}}"><i class="bx bx-right-arrow-alt"></i>Loại sản phẩm</a>
+                </li>
+                <li>
                     <a href="{{route('product.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
                 </li>
                 <li>

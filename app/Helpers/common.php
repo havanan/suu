@@ -3,6 +3,8 @@
 use App\Helpers\Globals;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
+use Intervention\Image\ImageManagerStatic as Image;
 
 function paging($items, $page = Globals::CURRENT_PAGE, $perPage = Globals::PER_PAGE, $additional_field = []) {
     if($page < 0) { $perPage = Globals::PER_PAGE_MAX; $page = Globals::CURRENT_PAGE;}
@@ -37,4 +39,30 @@ function getIp() {
 function getUserCurrent($guard = '') {
     if($guard) return Auth::guard($guard)->check() ? Auth::guard($guard)->user() : null;
     return Auth::check() ? Auth::user() : null;
+}
+function uploadImage($file,$uploadFolder,$oldImageName = null){
+    $date  = Carbon::now()->format('Ymdhis');
+    $saveDefaultFolder = public_path('/cdn/'.$uploadFolder.'/default/');
+    $saveSmallFolder = public_path('/cdn/'.$uploadFolder.'/small/');
+    //tạo folder neu chua ton tai
+    if (!file_exists($saveDefaultFolder)) mkdir($saveDefaultFolder, 666, true);
+    if (!file_exists($saveSmallFolder)) mkdir($saveSmallFolder, 666, true);
+    //nếu có ảnh cũ trong thư mục thì xóa đi
+    if ($oldImageName != null){
+        removeImage($oldImageName,$uploadFolder);
+    }
+    //RENDER ẢNH
+    //kiểm tra tính tồn tại trong thư mục render
+    $imgName = $date.'.png';
+    //resize image default and upload
+        Image::make($file->getRealPath())->resize(1028,849)->save($saveDefaultFolder.$imgName);
+    //resize image small and upload
+        Image::make($file->getRealPath())->resize(265,201)->save($saveSmallFolder.$imgName);
+        return $imgName;
+}
+function removeImage($imageName,$uploadFolder){
+    $saveDefaultFolder = public_path('/cdn/'.$uploadFolder.'/default/'.$imageName);
+    $saveSmallFolder = public_path('/cdn/'.$uploadFolder.'/small/'.$imageName);
+    if (file_exists($saveDefaultFolder)) unlink($saveDefaultFolder);
+    if (file_exists($saveSmallFolder)) unlink($saveSmallFolder);
 }

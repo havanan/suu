@@ -45,10 +45,19 @@ class ProductController extends Controller
     }
     public function uploadImage(UploadImageRequest $request){
         $file = $request->file('file');
-
+        if (!$file) {
+            return [];
+        }
+        $imageName = uploadImage($file,'products');
+        $params = [
+          'name' => $imageName,
+          'folder' => 'products'
+        ];
+        $info = $this->productService->createMedia($params);
         return [
-                'name' => $file->getClientOriginalName(),
-             'size' => $file->getSize()
+                'name' => $imageName,
+                'size' => $file->getSize(),
+                'id' => isset($info->id) ? $info->id : null
         ];
     }
 }

@@ -10,7 +10,7 @@ use App\Http\Controllers\Manager\CustomerController;
 use App\Http\Controllers\Manager\StockController;
 use App\Http\Controllers\Manager\UserController;
 use App\Http\Controllers\Manager\VoucherController;
-
+use App\Http\Controllers\Manager\ProductCategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,7 +35,6 @@ Route::prefix('manager')->group(function (){
             Route::get('tao-moi',   [ProductController::class,'create'])->name('product.create');
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
-
             Route::post('upload-image', [ProductController::class,'uploadImage'])->name('product.uploadImage');
             Route::post('cap-nhat', [ProductController::class,'update'])->name('product.update');
             Route::post('tao-moi',  [ProductController::class,'save'])->name('product.save');
@@ -51,6 +50,15 @@ Route::prefix('manager')->group(function (){
                 Route::post('cap-nhat',  [ProductUnitController::class,'update'])->name('product_unit.update');
                 Route::post('tao-moi',   [ProductUnitController::class,'save'])->name('product_unit.save');
             });
+        });
+        Route::group([
+            'prefix' => 'loai-san-pham'
+        ],function (){
+            Route::get('/',         [ProductCategoryController::class,'index'])->name('product_category.index');
+            Route::get('xoa/{id}',  [ProductCategoryController::class,'delete'])->name('product_category.delete');
+            Route::post('cap-nhat', [ProductCategoryController::class,'update'])->name('product_category.update');
+            Route::post('tao-moi',   [ProductCategoryController::class,'index'])->name('product_category.save');
+
         });
         Route::group([
             'prefix' => 'nhan-vien'
