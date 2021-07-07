@@ -18,7 +18,7 @@
                 <b-icon icon="three-dots" animation="cylon" class="ml-2 text-success" id="loading" style="display: none" font-scale="1.5"></b-icon>
               </label>
               <div class="row">
-                <div class="col-md-3 mb-1 text-right" v-for="item in previewImages">
+                <div class="col-md-3 col-sm-12 mb-1 text-right" v-for="item in previewImages">
                   <img :src="'/cdn/products/small/'+item.name" style="width: 100%">
                   <i class="text-danger" @click="removeImage(item)" style="cursor: pointer">x</i>
                 </div>
@@ -31,27 +31,27 @@
         </div>
         <div class="mb-3">
           <div class="row">
-            <div class="col-md-6">
-              <label for="inputPrice" class="form-label">Giá nhập</label>
-              <input type="number" class="form-control" id="inputPrice" v-model="formData.price_import">
-            </div>
-            <div class="col-md-6">
-              <label for="inputCompareatprice" class="form-label">Giá bán</label>
-              <input type="number" class="form-control" id="inputCompareatprice" v-model="formData.price">
-            </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
               <label for="inputCostPerPrice" class="form-label">Loại sản phẩm</label>
               <v-select :options="configs.categories" v-model="formData.category_id"></v-select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
+              <label  class="form-label">Đơn vị</label>
+              <v-select :options="configs.units" v-model="formData.unit"></v-select>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for="inputPrice" class="form-label">Giá nhập</label>
+              <input type="number" class="form-control" id="inputPrice" v-model="formData.price_import">
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for="inputCompareatprice" class="form-label">Giá bán</label>
+              <input type="number" class="form-control" id="inputCompareatprice" v-model="formData.price">
+            </div>
+            <div class="col-md-6 col-sm-12">
               <label for="inputCostPerPrice" class="form-label">Giá khuyến mại</label>
               <input type="number" class="form-control" id="inputCostPerPrice" v-model="formData.price_disount">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-12">
               <label for="inputStarPoints" class="form-label">Tổng số lượng</label>
               <input type="number" class="form-control" id="inputStarPoints" v-model="formData.total" readonly>
             </div>
@@ -65,23 +65,42 @@
     </div>
     <div class="col-lg-6">
       <div class="border border-3 p-4 rounded">
-        <div class="row g-3">
-          <div class="col-md-6 col-sm-12">
+        <div class="row mb-3" v-for="(detail,key) in formData.details">
+          <div class="col-md-4 col-sm-12">
             <label  class="form-label">Trạng thái</label>
-            <v-select :options="configs.status" v-model="formData.status"></v-select>
+            <v-select :options="configs.status" v-model="formData.details[key].status"></v-select>
           </div>
-          <div class="col-md-6 col-sm-12">
-            <label  class="form-label">Đơn vị</label>
-            <v-select :options="configs.units" v-model="formData.unit"></v-select>
-          </div>
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <label class="form-label">Màu sắc</label>
-            <v-select :options="configs.colors" v-model="formData.color"></v-select>
+            <v-select :options="configs.colors" v-model="formData.details[key].color"></v-select>
           </div>
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-4 col-sm-12">
             <label class="form-label">Size</label>
-            <v-select :options="configs.sizes" v-model="formData.size"></v-select>
+            <v-select :options="configs.sizes" v-model="formData.details[key].size"></v-select>
           </div>
+          <div class="col-md-4 col-sm-12">
+            <label for="inputPrice" class="form-label">Giá nhập</label>
+            <input type="number" class="form-control" id="inputPrice" v-model="formData.price_import">
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label for="inputCompareatprice" class="form-label">Giá bán</label>
+            <input type="number" class="form-control" id="inputCompareatprice" v-model="formData.price">
+          </div>
+          <div class="col-md-4 col-sm-12">
+            <label for="inputCostPerPrice" class="form-label">Giá khuyến mại</label>
+            <input type="number" class="form-control" id="inputCostPerPrice" v-model="formData.price_disount">
+          </div>
+          <div class="col-12 text-right mt-3">
+            <button class="btn btn-danger" @click="removeDetail(detail)"> <b-icon icon="trash-fill" aria-hidden="true"></b-icon></button>
+          </div>
+
+        </div>
+        <div class="row mb-3">
+          <div class="col-12 text-right">
+            <button type="button" class="btn btn-primary" @click="addDetail()"><b-icon icon="file-plus" aria-hidden="true"></b-icon></button>
+          </div>
+        </div>
+        <div class="row">
           <div class="col-12">
             <div class="d-grid">
               <button type="button" class="btn btn-primary">Lưu</button>
@@ -135,7 +154,8 @@
         unit:null,
         category_id:null,
         color:0,
-        size:0
+        size:0,
+        details:[{status:null,color:null,size:null}]
       },
       previewImages:[],
     }
@@ -183,6 +203,20 @@
           }
         }
       },
+    removeDetail(detail){
+      const vm = this
+      const productDetails = vm.formData.details;
+      const index = productDetails.indexOf(detail);
+      if(index > -1){
+        productDetails.splice(index, 1);
+        vm.formData.details =  productDetails;
+      }
+    },
+    addDetail(){
+      const vm = this
+      const productDetails = vm.formData.details;
+      productDetails.push({status:null,color:null,size:null})
+    }
   }
 }
 </script>
