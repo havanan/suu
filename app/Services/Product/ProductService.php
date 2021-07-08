@@ -48,4 +48,13 @@ class ProductService extends BaseService
     public function createMedia($params){
         return $this->productMedia->create($params);
     }
+    public function create($params){
+        //nhập sp
+
+        //nhập kho
+
+        //nhập giá sp
+
+        //nhập sản phẩm con
+    }
 }
