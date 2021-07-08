@@ -33,6 +33,7 @@ Route::prefix('manager')->group(function (){
             Route::get('get-list',  [ProductController::class,'getList'])->name('product.getList');
             Route::get('get-property',  [ProductController::class,'getProperty'])->name('product.getProperty');
             Route::get('tao-moi',   [ProductController::class,'create'])->name('product.create');
+            Route::get('media',   [ProductController::class,'mediaList'])->name('product.mediaList');
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
             Route::post('upload-image', [ProductController::class,'uploadImage'])->name('product.uploadImage');
@@ -46,7 +47,6 @@ Route::prefix('manager')->group(function (){
                 Route::get('sua/{id}',   [ProductUnitController::class,'edit'])->name('product_unit.edit');
                 Route::get('xoa/{id}',   [ProductUnitController::class,'delete'])->name('product_unit.delete');
                 Route::get('get-list',   [ProductUnitController::class,'getList'])->name('product_unit.getList');
-
                 Route::post('cap-nhat',  [ProductUnitController::class,'update'])->name('product_unit.update');
                 Route::post('tao-moi',   [ProductUnitController::class,'save'])->name('product_unit.save');
             });

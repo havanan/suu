@@ -8,6 +8,7 @@ use App\Http\Requests\Product\CreateRequest;
 use App\Http\Requests\Product\UploadImageRequest;
 use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
@@ -20,14 +21,15 @@ class ProductController extends Controller
     }
     public function getList(Request $request){
         $params = $request->all();
-        $data = $this->productService->getList($params);
-        return $data;
+        return $this->productService->getList($params);
     }
     public function create(){
         $id = null;
         return view('manager.product.create',compact('id'));
     }
     public function save(CreateRequest $request){
+        $params = $request->all();
+        dd($params);
         return view('manager.product.create');
     }
     public function edit($id){
@@ -59,5 +61,21 @@ class ProductController extends Controller
                 'size' => $file->getSize(),
                 'id' => isset($info->id) ? $info->id : null
         ];
+    }
+    public function mediaList($page = false){
+        $dir = public_path('/cdn/products/small');
+        if ($page !== false) {
+            $dir .= '/' . $page;
+        }
+        return collect(File::allFiles($dir))
+            ->filter(function ($file) {
+                return in_array($file->getExtension(), ['png', 'gif', 'jpg']);
+            })
+            ->sortByDesc(function ($file) {
+                return $file->getCTime();
+            })
+            ->map(function ($file) {
+                return $file->getRelativePathname();
+            });
     }
 }

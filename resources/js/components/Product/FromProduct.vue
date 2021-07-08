@@ -1,11 +1,12 @@
 <template>
-  <div class="row">
-    <div class="col-lg-12 mb-3">
-      <div class="border border-3 p-4 rounded">
-        <h3>Chi tiết sản phẩm</h3>
-        <div class="row mb-3">
-          <div class="col-md-4 col-sm-12">
-              <label class="form-label">Ảnh sản phẩm</label>
+  <b-form @submit.stop.prevent="pushData">
+    <div class="row">
+      <div class="col-lg-12 mb-3">
+        <div class="border border-3 p-4 rounded">
+          <h3>Chi tiết sản phẩm</h3>
+          <div class="row mb-3">
+            <div class="col-md-4 col-sm-12">
+              <label class="form-label">Upload Ảnh sản phẩm</label>
               <vue-dropzone ref="myVueDropzone"
                             id="dropzone"
                             :options="dropzoneOptions"
@@ -14,123 +15,140 @@
                             v-on:vdropzone-complete="uploadComplete"
               ></vue-dropzone>
             </div>
-          <div class="col-md-8 col-sm-12">
-              <label class="form-label">Preview
+            <div class="col-md-8 col-sm-12">
+              <label class="form-label">Chọn ảnh sản phẩm<i class="text-danger">*</i>
                 <b-icon icon="three-dots" animation="cylon" class="ml-2 text-success" id="loading" style="display: none" font-scale="1.5"></b-icon>
+                <p v-if="errors.images" class="text-danger">{{errors.images}}</p>
               </label>
-              <div class="row">
-                <div class="col-md-3 col-sm-12 mb-1 text-right" v-for="item in previewImages">
-                  <img :src="'/cdn/products/small/'+item.name" style="width: 100%">
-                  <p><span>{{item.name}} </span>   <i class="text-danger" @click="removeImage(item)" style="cursor: pointer">x</i></p>
-                </div>
-              </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="inputProductTitle" class="form-label">Tên sản phẩm</label>
-          <input type="text" class="form-control" id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="makeSlug()">
-        </div>
-        <div class="mb-3">
-          <label for="inputProductTitle" class="form-label">Seo Url</label>
-          <input type="text" class="form-control" v-model="formData.slug">
-        </div>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-md-6 col-sm-12">
-              <div class="row">
-                <div class="col-md-6 col-sm-12">
-                  <label  class="form-label">Loại sản phẩm</label>
-                  <v-select :options="configs.categories" v-model="formData.category_id"></v-select>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                  <label  class="form-label">Đơn vị</label>
-                  <v-select :options="configs.units" v-model="formData.unit"></v-select>
-                </div>
-                <div class="col-md-6 col-sm-12">
-                  <label  class="form-label">Giá nhập</label>
-                  <input type="number" class="form-control"  v-model="formData.price_import">
-                </div>
-                <div class="col-md-6 col-sm-12">
-                  <label  class="form-label">Giá bán</label>
-                  <input type="number" class="form-control"  v-model="formData.price">
-                </div>
-                <div class="col-md-6 col-sm-12">
-                  <label  class="form-label">Giá khuyến mại</label>
-                  <input type="number" class="form-control"  v-model="formData.price_disount">
-                </div>
-                <div class="col-md-6 col-sm-12">
-                  <label for="inputStarPoints" class="form-label">Tổng số lượng</label>
-                  <input type="number" class="form-control" id="inputStarPoints" v-model="formData.total" readonly>
-                </div>
-              </div>
+              <b-row class="box-image">
+                <b-col cols="6" md="2" v-for="(img,index) in productImages" :key="index">
+                  <label :title="img">
+                    <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" class="img-preview" :id="'popover-target-'+index"></b-img-lazy>
+                    <input type="checkbox" v-model="formData.images" :id="'productImage'+index" :value="img" >
+                    <b-popover :target="'popover-target-'+index" triggers="hover" placement="top">
+                      <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
+                    </b-popover>
+                  </label>
+                </b-col>
+              </b-row>
             </div>
-            <div class="col-md-6 col-sm-12">
-              <label for="inputProductDescription" class="form-label">Mô tả sản phẩm</label>
-              <vue-editor v-model="formData.description"></vue-editor>
+          </div>
+          <div class="mb-3">
+            <label for="inputProductTitle" class="form-label">Tên sản phẩm <i class="text-danger">*</i></label>
+            <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="makeSlug()" >
+            <span class="text-danger" v-if="errors.name">{{errors.name}}</span>
+          </div>
+          <div class="mb-3">
+            <label for="inputProductTitle" class="form-label">Seo Url</label>
+            <input type="text" class="form-control" v-model="formData.slug">
+          </div>
+          <div class="mb-3">
+            <div class="row">
+              <div class="col-md-6 col-sm-12">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12">
+                    <label  class="form-label">Loại sản phẩm <i class="text-danger">*</i></label>
+                    <v-select :options="configs.categories" v-model="formData.category_id" :class="errors.category_id ? 'is-invalid' : ''"></v-select>
+                    <span class="text-danger" v-if="errors.category_id">{{errors.category_id}}</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label  class="form-label">Đơn vị</label>
+                    <v-select :options="configs.units" v-model="formData.unit"></v-select>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label  class="form-label">Giá nhập <i class="text-danger">*</i></label>
+                    <input type="number" min="0" class="form-control" :class="errors.price_import ? 'is-invalid' : ''"  v-model="formData.price_import" >
+                    <span class="text-danger" v-if="errors.price_import">{{errors.price_import}}</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label  class="form-label">Giá bán <i class="text-danger">*</i></label>
+                    <input type="number" min="0" class="form-control" :class="errors.price ? 'is-invalid' : ''"  v-model="formData.price" >
+                    <span class="text-danger" v-if="errors.price">{{errors.price}}</span>
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label  class="form-label">Giá khuyến mại</label>
+                    <input type="number" min="0" class="form-control"  v-model="formData.price_discount">
+                  </div>
+                  <div class="col-md-6 col-sm-12">
+                    <label for="inputStarPoints" class="form-label">Tổng số lượng</label>
+                    <input type="number" min="0" class="form-control" id="inputStarPoints" v-model="formData.total" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label class="form-label">Mô tả sản phẩm</label>
+                <vue-editor v-model="formData.description"></vue-editor>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-lg-12">
-      <div class="border border-3 p-4 rounded">
-        <h3>Thuộc tính sản phẩm</h3>
-        <template v-for="(detail,key) in formData.details">
-          <div class="row mb-3">
-            <div class="col-md-3 col-sm-12">
-              <label  class="form-label">Ảnh</label>
-              <v-select :options="previewImages" v-model="formData.details[key].image">
-                <template slot="option" slot-scope="option">
-                  <img :src="'/cdn/products/small/'+option.name" style="width: 50px" />
-                  {{ option.name }}
-                </template>
-              </v-select>
+      <div class="col-lg-12">
+        <div class="border border-3 p-4 rounded">
+          <h3>Thuộc tính sản phẩm</h3>
+          <template v-for="(detail,key) in formData.details">
+            <div class="row mb-3">
+              <div class="col-md-3 col-sm-12">
+                <label  class="form-label">Ảnh</label>
+                <div class="row detail-box-image">
+                  <div v-for="(img,index) in productImages" class="col-3">
+                    <label>
+                      <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" :id="'popover-detail-'+index"></b-img-lazy>
+                      <input type="radio" v-model="formData.details[key].image" :id="'detailImage'+index+key" :value="img">
+                      <b-popover :target="'popover-detail-'+index" triggers="hover" placement="top">
+                        <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
+                      </b-popover>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label  class="form-label">Trạng thái</label>
+                <v-select :options="configs.status" v-model="formData.details[key].status"></v-select>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label class="form-label">Màu sắc</label>
+                <v-select :options="configs.colors" v-model="formData.details[key].color"></v-select>
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label class="form-label">Size</label>
+                <v-select :options="configs.sizes" v-model="formData.details[key].size"></v-select>
+              </div>
             </div>
-            <div class="col-md-3 col-sm-12">
-              <label  class="form-label">Trạng thái</label>
-              <v-select :options="configs.status" v-model="formData.details[key].status"></v-select>
-            </div>
-            <div class="col-md-3 col-sm-12">
-              <label class="form-label">Màu sắc</label>
-              <v-select :options="configs.colors" v-model="formData.details[key].color"></v-select>
-            </div>
-            <div class="col-md-3 col-sm-12">
-              <label class="form-label">Size</label>
-              <v-select :options="configs.sizes" v-model="formData.details[key].size"></v-select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3 col-sm-12">
-              <label class="form-label">Số lượng</label>
-              <input type="number" min="0" v-model="formData.details[key].total" class="form-control" @change="updateTotal()">
-            </div>
-            <div class="col-md-3 col-sm-12">
-              <label  class="form-label">Giá nhập</label>
-              <input type="number" class="form-control"  v-model="formData.details[key].price_import">
-            </div>
-            <div class="col-md-3 col-sm-12">
-              <label  class="form-label">Giá bán</label>
-              <input type="number" class="form-control"  v-model="formData.details[key].price">
-            </div>
-            <div class="col-md-3 col-sm-12">
-              <label  class="form-label">Giá khuyến mại</label>
-              <input type="number" class="form-control"  v-model="formData.details[key].price_disount">
-            </div>
-            <div class="col-12 text-right mt-3">
-              <button class="btn btn-danger" @click="removeDetail(detail)"> <b-icon icon="trash-fill" aria-hidden="true"></b-icon></button>
-            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-12">
+                <label class="form-label">Số lượng</label>
+                <input type="number" min="0" v-model="formData.details[key].total" class="form-control" @change="updateTotal()">
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label  class="form-label">Giá nhập</label>
+                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_import">
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label  class="form-label">Giá bán</label>
+                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price">
+              </div>
+              <div class="col-md-3 col-sm-12">
+                <label  class="form-label">Giá khuyến mại</label>
+                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_discount">
+              </div>
+              <div class="col-12 text-right mt-3">
+                <button class="btn btn-danger" @click="removeDetail(detail)"> <b-icon icon="trash-fill" aria-hidden="true"></b-icon></button>
+              </div>
 
-          </div>
-        </template>
-        <div class="row mt-3 mb-3">
-          <div class="col-12 text-right">
-            <button type="button" class="btn btn-success mr-2" @click="addDetail()"><b-icon icon="file-plus" aria-hidden="true"></b-icon></button>
-            <button type="button" class="btn btn-primary" @click="pushData()">Lưu</button>
+            </div>
+          </template>
+          <div class="row mt-3 mb-3">
+            <div class="col-12 text-right">
+              <button type="button" class="btn btn-success" @click="addDetail()"><b-icon icon="file-plus" aria-hidden="true"></b-icon></button>
+              <button type="reset" class="btn btn-danger">Nhập lại</button>
+              <button type="submit" class="btn btn-primary">Lưu</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div><!--end row-->
+    </div><!--end row-->
+  </b-form>
 </template>
 <script>
   import { VueEditor, Quill } from "vue2-editor";
@@ -143,6 +161,7 @@
   props:['id'],
   mounted() {
     this.getProductProperty()
+    this.getAllProductImage()
   },
   data: function () {
     return {
@@ -172,14 +191,22 @@
         description:'',
         images:[],
         imageRemove:[],
-        status:0,
+        status:null,
         unit:null,
         category_id:null,
-        color:0,
-        size:0,
         details:[{status:null,color:null,size:null,price_import:null,price_discount:null,price:null,total:0,image:null}]
       },
-      previewImages:[],
+      mainProps:{
+        blankColor: '#bbb',
+      },
+      productImages: [],
+      errors:{
+        name:null,
+        price_import:null,
+        price:null,
+        images:null,
+        category_id:null
+      }
     }
   },
   methods:{
@@ -192,9 +219,7 @@
     },
     uploadSuccess(file, response) {
         if(response.id){
-          this.formData.images.push(response.id)
-          this.previewImages.push(response);
-
+          this.productImages.push(response.name)
         }
     },
     uploadProcess(file){
@@ -205,26 +230,6 @@
     uploadComplete(res){
       $('#loading').hide()
     },
-      removeImage(image){
-        const vm = this
-        const previewImages = vm.previewImages;
-        const formImages = vm.formData.images;
-        if (image && image.id > 0) {
-          //xóa ảnh cũ của sp
-          const index = previewImages.indexOf(image);
-          if(index > -1){
-            previewImages.splice(index, 1);
-            vm.previewImages =  previewImages;
-            vm.formData.imageRemove.push(image.id)
-          }
-          //xóa ảnh ở mảng upload
-          const imageIndex = formImages.indexOf(image.id);
-          if(imageIndex > -1){
-            formImages.splice(index, 1);
-            vm.formData.images =  formImages;
-          }
-        }
-      },
     removeDetail(detail){
       const vm = this
       const productDetails = vm.formData.details;
@@ -274,7 +279,35 @@
     },
     pushData(){
       const vm = this
-      console.log(vm.formData)
+      axios.post('/manager/san-pham/tao-moi',vm.formData).then(function (res) {
+        console.log(res)
+        console.log('done')
+      }).catch(function (error) {
+        if(error.response && error.response.data && error.response.data.errors) {
+            vm.errors = error.response.data.errors
+        }
+      });
+    },
+    resetForm(){
+      const vm = this
+      vm.formData = {
+        name:'',
+        slug:'',
+        code:'',
+        price_import:0,
+        price:0,
+        price_discount:0,
+        total:0,
+        description:'',
+        images:[],
+        imageRemove:[],
+        status:0,
+        unit:null,
+        category_id:null,
+        color:0,
+        size:0,
+        details:[{status:null,color:null,size:null,price_import:null,price_discount:null,price:null,total:0,image:null}]
+      }
     },
     updateTotal(){
       const vm = this
@@ -288,6 +321,16 @@
         }
       }
       vm.formData.total = total
+    },
+    async getAllProductImage(){
+      const vm = this
+      const res = await axios.get('/manager/san-pham/media');
+      if (res.data){
+        vm.productImages = res.data
+      }
+    },
+    getImageUrl(img){
+      return '/cdn/products/small/'+img;
     },
   }
 }

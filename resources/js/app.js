@@ -17,6 +17,7 @@ window.Vue = require('vue').default;
 Vue.use(Notifications);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
+
 Vue.component('ProductList',ProductList);
 Vue.component('FromProduct',FromProduct);
 Vue.component('UnitList',UnitList);

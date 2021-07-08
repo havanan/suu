@@ -1,0 +1,19 @@
+.box-image {
+  overflow: auto;
+  max-height: 160px !important;
+  .img-preview {
+    width: 70px;
+    height:70px;
+  }
+}
+.img-product{
+  width: 400px;
+}
+.detail-box-image {
+  overflow: auto;
+  max-height: 80px !important;
+  img {
+    width: 100%;
+    height:50px;
+  }
+}
