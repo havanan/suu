@@ -18,7 +18,7 @@ mix.styles([
     'resources/theme/admin/rocker/assets/css/dark-theme.css',
     'resources/theme/admin/rocker/assets/css/semi-dark.css',
     'resources/theme/admin/rocker/assets/css/header-colors.csss',
-    'resources/theme/admin/rocker/assets/plugins/toastr/toastr.css',
+    // 'resources/theme/admin/rocker/assets/plugins/toastr/toastr.css',
 ], 'public/assets/admin/css/lib.css').version();
 
 mix.scripts([
@@ -30,6 +30,6 @@ mix.scripts([
     'resources/theme/admin/rocker/assets/plugins/metismenu/js/metisMenu.min.js',
     'resources/theme/admin/rocker/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js',
     'resources/theme/admin/rocker/assets/js/app.js',
-    'resources/theme/admin/rocker/assets/plugins/toastr/toastr.min.js'
+    // 'resources/theme/admin/rocker/assets/plugins/toastr/toastr.min.js'
     // 'resources/theme/admin/rocker/js/popper.min.js',
 ], 'public/assets/admin/js/lib.js').version();

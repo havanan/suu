@@ -26,14 +26,15 @@
             </a>
             <ul>
                 <li>
+                    <a href="{{route('product.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
+                </li>
+                <li>
                     <a href="{{route('product.list')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách</a>
                 </li>
                 <li>
-                    <a href="{{route('product.list')}}"><i class="bx bx-right-arrow-alt"></i>Loại sản phẩm</a>
+                    <a href="{{route('product_category.index')}}"><i class="bx bx-right-arrow-alt"></i>Loại sản phẩm</a>
                 </li>
-                <li>
-                    <a href="{{route('product.create')}}"><i class="bx bx-right-arrow-alt"></i>Tạo mới</a>
-                </li>
+
                 <li>
                     <a href="{{route('product_unit.index')}}"><i class="bx bx-right-arrow-alt"></i>Đơn vị</a>
                 </li>
@@ -47,10 +48,21 @@
             </a>
             <ul>
                 <li>
+                    <a href="{{route('stock.list')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách kho</a>
+                </li>
+                <li>
                     <a href="{{route('stock.import')}}"><i class="bx bx-right-arrow-alt"></i>Nhập kho</a>
+                </li>
+                <li>
                     <a href="{{route('stock.import_list')}}"><i class="bx bx-right-arrow-alt"></i>Phiếu nhập kho</a>
+                </li>
+                <li>
                     <a href="{{route('stock.export')}}"><i class="bx bx-right-arrow-alt"></i>Xuất kho</a>
+                </li>
+                <li>
                     <a href="{{route('stock.export_list')}}"><i class="bx bx-right-arrow-alt"></i>Phiếu xuất kho</a>
+                </li>
+                <li>
                     <a href="{{route('stock.available')}}"><i class="bx bx-right-arrow-alt"></i>Tồn kho</a>
                 </li>
             </ul>

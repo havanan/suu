@@ -12,7 +12,11 @@ use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\Unit\ProductUnitInterface;
 use App\Repositories\Product\Unit\ProductUnitRepository;
 use App\Repositories\BaseRepositoryInterface;
+use App\Repositories\User\UserInterface;
+use App\Repositories\User\UserRepository;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Stock\StockInterface;
+use App\Repositories\Stock\StockRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -28,7 +32,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductUnitInterface::class, ProductUnitRepository::class);
         $this->app->bind(ProductCategoryInterface::class, ProductCategoryRepository::class);
         $this->app->bind(ProductMediaInterface::class, ProductMediaRepository::class);
-
+        $this->app->bind(UserInterface::class, UserRepository::class);
+        $this->app->bind(StockInterface::class, StockRepository::class);
 
     }
 

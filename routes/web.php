@@ -69,7 +69,7 @@ Route::prefix('manager')->group(function (){
             Route::get('xoa/{id}',  [UserController::class,'delete'])->name('user.delete');
             Route::get('nhom-tai-khoan',   [UserController::class,'group'])->name('user.group');
             Route::get('quyen',   [UserController::class,'role'])->name('user.role');
-
+            Route::get('get-owner',   [UserController::class,'getOwner'])->name('user.get_owner');
             Route::post('cap-nhat', [UserController::class,'update'])->name('user.update');
             Route::post('tao-moi',  [UserController::class,'save'])->name('user.save');
         });
@@ -77,17 +77,17 @@ Route::prefix('manager')->group(function (){
             'prefix' => 'kho'
         ],function (){
             Route::get('/',         [StockController::class,'index'])->name('stock.list');
-            Route::get('tao-moi',   [StockController::class,'index'])->name('stock.create');
+            Route::get('get-list',         [StockController::class,'getList']);
             Route::get('sua/{id}',  [StockController::class,'edit'])->name('stock.edit');
             Route::get('nhap-hang', [StockController::class,'import'])->name('stock.import');
             Route::get('phieu-nhap-hang', [StockController::class,'importList'])->name('stock.import_list');
             Route::get('xuat-hang', [StockController::class,'export'])->name('stock.export');
             Route::get('phieu-xuat-hang', [StockController::class,'exportList'])->name('stock.export_list');
-            Route::get('tom-kho', [StockController::class,'available'])->name('stock.available');
-
-            Route::get('xoa/{id}',  [StockController::class,'delete'])->name('stock.delete');
-            Route::post('cap-nhat', [StockController::class,'update'])->name('stock.update');
-            Route::post('tao-moi',  [StockController::class,'save'])->name('stock.save');
+            Route::get('ton-kho', [StockController::class,'available'])->name('stock.available');
+            Route::get('get-config',   [StockController::class,'getConfig'])->name('user.get_config');
+            Route::get('xoa/{id}',  [StockController::class,'delete']);
+            Route::post('sua/{id}', [StockController::class,'update']);
+            Route::post('tao-moi',  [StockController::class,'save']);
         });
         Route::group([
             'prefix' => 'don-hang'

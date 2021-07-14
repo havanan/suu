@@ -66,3 +66,35 @@ function removeImage($imageName,$uploadFolder){
     if (file_exists($saveDefaultFolder)) unlink($saveDefaultFolder);
     if (file_exists($saveSmallFolder)) unlink($saveSmallFolder);
 }
+function writeResponseData($code, $msg, $data) {
+    return response()->json([
+        'code' => $code,
+        'message' => $msg,
+        'data' => $data
+    ]);
+}
+function writeResponseError($code, $msg, $error) {
+    return response()->json([
+        'code' => $code,
+        'message' => $msg,
+        'errors' => $error
+    ]);
+}
+function writeResponse($code, $msg) {
+    return response()->json([
+        'code' => $code,
+        'message' => $msg
+    ]);
+}
+function resSuccess($msg = null) {
+    $msg = $msg ? $msg : 'thành công';
+    return writeResponse(200, $msg);
+}
+function resSuccessData($data, $msg = null) {
+    $msg = $msg ? $msg : 'thành công';
+    return writeResponseData(200, $msg, $data);
+}
+function resFail($msg = null, $code = 500) {
+    $msg = $msg ? $msg : 'thất bại';
+    return writeResponse($code , $msg);
+}

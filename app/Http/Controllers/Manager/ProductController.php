@@ -29,9 +29,8 @@ class ProductController extends Controller
     }
     public function save(CreateRequest $request){
         $params = $request->all();
-        return $this->productService->create($params);
-//        dd($params);
-//        return view('manager.product.create');
+        $this->productService->create($params);
+        return $this->productService->getList([]);
     }
     public function edit($id){
         return view('manager.product.create',compact('id'));
