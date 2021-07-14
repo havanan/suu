@@ -49,6 +49,7 @@ class ProductService extends BaseService
         return $this->productMedia->create($params);
     }
     public function create($params){
+        dd($params);
         //nhập sp
 
         //nhập kho

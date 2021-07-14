@@ -11,7 +11,8 @@ class ProductCategory extends Model
     protected $guarded = ['id'];
     protected $table = 'product_category';
 
-    public function child(){
-        return $this->hasMany(ProductCategory::class,'parent_id','id');
+    public function children(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ProductCategory::class,'parent_id','id')->select('id as code','name as label','slug','parent_id');
     }
 }

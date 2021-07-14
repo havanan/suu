@@ -6,7 +6,7 @@ namespace App\Helpers;
 class Globals
 {
     const COLORS = [
-        'Hồng','Xanh','Vàng','Trắng'
+        'Hồng','Xanh','Vàng','Trắng','Đen'
     ];
     const SIZES =  [
         'S','M','L','XL','XXL',59,66,73,80,90

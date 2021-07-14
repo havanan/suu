@@ -57,7 +57,7 @@ Route::prefix('manager')->group(function (){
             Route::get('/',         [ProductCategoryController::class,'index'])->name('product_category.index');
             Route::get('xoa/{id}',  [ProductCategoryController::class,'delete'])->name('product_category.delete');
             Route::post('cap-nhat', [ProductCategoryController::class,'update'])->name('product_category.update');
-            Route::post('tao-moi',   [ProductCategoryController::class,'index'])->name('product_category.save');
+            Route::post('tao-moi',   [ProductCategoryController::class,'save'])->name('product_category.save');
 
         });
         Route::group([

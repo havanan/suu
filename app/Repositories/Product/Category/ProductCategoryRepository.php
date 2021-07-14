@@ -18,10 +18,13 @@ class ProductCategoryRepository extends BaseBaseRepository implements ProductCat
         return $this->getModel()->paginate(10);
     }
     public function getAll(){
-        return $this->model->with('child')->select('product_category.name as label','product_category.id as code')
-            ->where('product_category.status',Globals::ACTIVE)
-            ->whereNull('product_category.parent_id')
-            ->orderBy('product_category.id')
+        return $this->model->with(['children'])
+                ->select('name as label','parent_id','id','id as code')
+            ->where('status',Globals::ACTIVE)
+            ->where(function ($q) {
+                $q->where('parent_id',null)->orWhere('parent_id','');
+            })
+            ->orderBy('id')
             ->get();
     }
 }

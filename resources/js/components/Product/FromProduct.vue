@@ -35,7 +35,7 @@
           </div>
           <div class="mb-3">
             <label for="inputProductTitle" class="form-label">Tên sản phẩm <i class="text-danger">*</i></label>
-            <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="makeSlug()" >
+            <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="getProductSlug()" >
             <span class="text-danger" v-if="errors.name">{{errors.name}}</span>
           </div>
           <div class="mb-3">
@@ -48,7 +48,26 @@
                 <div class="row">
                   <div class="col-md-6 col-sm-12">
                     <label  class="form-label">Loại sản phẩm <i class="text-danger">*</i></label>
-                    <v-select :options="configs.categories" v-model="formData.category_id" :class="errors.category_id ? 'is-invalid' : ''"></v-select>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <v-select :options="configs.categories" v-model="formData.category_id" :class="errors.category_id ? 'is-invalid' : ''"></v-select>
+                      </div>
+                      <!-- tạo nhanh loại sản phẩm-->
+                      <div class="col-md-2 text-right">
+                        <button type="button" class="btn btn-primary" id="popover-button-variant">+</button>
+                        <b-popover target="popover-button-variant" triggers="focus" :show.sync="popover">
+                          <template #title>Tạo nhanh</template>
+                          <div class="form-group">
+                            <label>Tên</label>
+                            <input type="text" class="form-control" v-model="formCat.name">
+                          </div>
+                          <div class="form-group text-right">
+                            <button class="btn btn-success" @click="createProductCategory()">Lưu</button>
+                          </div>
+                        </b-popover>
+                      </div>
+                      <!-- end tạo nhanh loại sản phẩm-->
+                    </div>
                     <span class="text-danger" v-if="errors.category_id">{{errors.category_id}}</span>
                   </div>
                   <div class="col-md-6 col-sm-12">
@@ -85,7 +104,14 @@
       </div>
       <div class="col-lg-12">
         <div class="border border-3 p-4 rounded">
-          <h3>Thuộc tính sản phẩm</h3>
+          <div class="row">
+            <div class="col-md-9 col-sm-12">
+              <h3>Thuộc tính sản phẩm</h3>
+            </div>
+            <div class="col-md-3 col-sm-12">
+              <h4 class="text-danger">Tiền nhập: {{vnPriceFormat(formData.price_total)}}</h4>
+            </div>
+          </div>
           <template v-for="(detail,key) in formData.details">
             <div class="row mb-3">
               <div class="col-md-3 col-sm-12">
@@ -122,7 +148,7 @@
               </div>
               <div class="col-md-3 col-sm-12">
                 <label  class="form-label">Giá nhập</label>
-                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_import">
+                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_import" @change="updateTotal()">
               </div>
               <div class="col-md-3 col-sm-12">
                 <label  class="form-label">Giá bán</label>
@@ -188,13 +214,14 @@
         price:0,
         price_discount:0,
         total:0,
+        price_total:0,
         description:'',
         images:[],
         imageRemove:[],
         status:null,
         unit:null,
         category_id:null,
-        details:[{status:null,color:null,size:null,price_import:null,price_discount:null,price:null,total:0,image:null}]
+        details:[]
       },
       mainProps:{
         blankColor: '#bbb',
@@ -206,7 +233,11 @@
         price:null,
         images:null,
         category_id:null
-      }
+      },
+      formCat:{
+        name:''
+      },
+      popover:false
     }
   },
   methods:{
@@ -243,39 +274,44 @@
     addDetail(){
       const vm = this
       const productDetails = vm.formData.details;
-      productDetails.push({status:null,color:null,size:null,price_import:null,price_discount:null,price:null,total:0,image:null})
+      const price = vm.formData.price
+      const price_import = vm.formData.price_import
+      const price_discount =  vm.formData.price_discount
+      productDetails.push({status:null,color:null,size:null,price_import:price_import,price_discount:price_discount,price:price,total:0,image:null})
     },
-    makeSlug(){
+    getProductSlug(){
+      const vm = this
+      vm.formData.slug = vm.makeSlug(vm.formData.name)
+    },
+    makeSlug(name){
       const vm = this
       let slug = ''
-      const name = vm.formData.name
-      if (name) {
-        //Đổi chữ hoa thành chữ thường
-        slug = name.toLowerCase();
+      //Đổi chữ hoa thành chữ thường
+      slug = name.toLowerCase();
 
-        //Đổi ký tự có dấu thành không dấu
-        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
-        slug = slug.replace(/đ/gi, 'd');
-        //Xóa các ký tự đặt biệt
-        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-        //Đổi khoảng trắng thành ký tự gạch ngang
-        slug = slug.replace(/ /gi, " - ");
-        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
-        slug = slug.replace(/\-\-\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-\-/gi, '-');
-        slug = slug.replace(/\-\-/gi, '-');
-        //Xóa các ký tự gạch ngang ở đầu và cuối
-        slug = '@' + slug + '@';
-        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-      }
-      vm.formData.slug = slug
+      //Đổi ký tự có dấu thành không dấu
+      slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+      slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+      slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+      slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+      slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+      slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+      slug = slug.replace(/đ/gi, 'd');
+      //Xóa các ký tự đặt biệt
+      slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+      //Đổi khoảng trắng thành ký tự gạch ngang
+      slug = slug.replace(/ /gi, "-");
+      //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+      //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+      slug = slug.replace(/\-\-\-\-\-/gi, '-');
+      slug = slug.replace(/\-\-\-\-/gi, '-');
+      slug = slug.replace(/\-\-\-/gi, '-');
+      slug = slug.replace(/\-\-/gi, '-');
+      //Xóa các ký tự gạch ngang ở đầu và cuối
+      slug = '@' + slug + '@';
+      slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+      return slug
+
     },
     pushData(){
       const vm = this
@@ -297,6 +333,7 @@
         price_import:0,
         price:0,
         price_discount:0,
+        price_total:0,
         total:0,
         description:'',
         images:[],
@@ -313,14 +350,20 @@
       const vm = this
       const details = vm.formData.details
       let total = 0
+      let priceTotal = 0;
       if(details.length > 0 ) {
         for (let i = 0; i < details.length;i++ ) {
           if(details[i].total) {
-            total += parseInt(details[i].total)
+            const itemTotal = parseInt(details[i].total)
+            const itemPrice = parseInt(details[i].price_import)
+
+            total += itemTotal
+            priceTotal += (itemTotal * itemPrice)
           }
         }
       }
       vm.formData.total = total
+      vm.formData.price_total = priceTotal
     },
     async getAllProductImage(){
       const vm = this
@@ -332,6 +375,26 @@
     getImageUrl(img){
       return '/cdn/products/small/'+img;
     },
+    vnPriceFormat(price){
+      price = parseInt(price)
+      if (price > 1000) {
+        price = price.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+      }
+      return price;
+    },
+    createProductCategory(){
+      const vm = this
+      const formCat = vm.formCat
+      formCat.slug = vm.makeSlug(vm.formCat.name)
+      axios.post('/manager/loai-san-pham/tao-moi',formCat).then(function (res){
+        if (res.data){
+          vm.popover = false
+          vm.configs.categories = res.data
+          vm.formCat.name = null
+          vm.formCat.slug = null
+        }
+      })
+    }
   }
 }
 </script>
