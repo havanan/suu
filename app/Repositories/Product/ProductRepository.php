@@ -16,7 +16,8 @@ class ProductRepository extends BaseBaseRepository implements ProductInterface
     public function getList($params)
     {
 
-        $data = $this->model->orderBy('id');
+        $data = $this->model->with(['child'])->orderBy('id')
+        ->whereNull('parent_id');
         if (isset($params['keyword']) && $params['keyword'] != null) {
             $data->where('name','like','%'.$params['keyword'].'%');
         }

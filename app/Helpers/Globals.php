@@ -18,5 +18,8 @@ class Globals
     const MEDIA_IMAGE = 0;
     const MEDIA_VIDEO = 1;
     const ACTIVE = 1;
+    const STOCK_DEFAULT = 1;
+    const PRODUCT = 0;
+    const COMBO = 1;
 
 }

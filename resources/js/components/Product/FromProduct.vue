@@ -23,10 +23,10 @@
               <b-row class="box-image">
                 <b-col cols="6" md="2" v-for="(img,index) in productImages" :key="index">
                   <label :title="img">
-                    <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" class="img-preview" :id="'popover-target-'+index"></b-img-lazy>
+                    <b-img-lazy   :src="getImageUrl(img)" :alt="img" class="img-preview" :id="'popover-target-'+index"></b-img-lazy>
                     <input type="checkbox" v-model="formData.images" :id="'productImage'+index" :value="img" >
                     <b-popover :target="'popover-target-'+index" triggers="hover" placement="top">
-                      <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
+                      <b-img-lazy   :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
                     </b-popover>
                   </label>
                 </b-col>
@@ -34,23 +34,28 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="inputProductTitle" class="form-label">Tên sản phẩm <i class="text-danger">*</i></label>
-            <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="getProductSlug()" >
-            <span class="text-danger" v-if="errors.name">{{errors.name}}</span>
-          </div>
-          <div class="mb-3">
-            <label for="inputProductTitle" class="form-label">Seo Url</label>
-            <input type="text" class="form-control" v-model="formData.slug">
-          </div>
-          <div class="mb-3">
             <div class="row">
               <div class="col-md-6 col-sm-12">
+                <div class="mb-3">
+                  <label for="inputProductTitle" class="form-label">Tên sản phẩm <i class="text-danger">*</i></label>
+                  <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="getProductSlug()" >
+                  <span class="text-danger" v-if="errors.name">{{errors.name}}</span>
+                </div>
+                <div class="mb-3">
+                  <label for="inputProductTitle" class="form-label">Seo Url</label>
+                  <input type="text" class="form-control" v-model="formData.slug">
+                </div>
                 <div class="row">
                   <div class="col-md-6 col-sm-12">
                     <label  class="form-label">Loại sản phẩm <i class="text-danger">*</i></label>
                     <div class="row">
-                      <div class="col-md-10">
-                        <v-select :options="configs.categories" v-model="formData.category_id" :class="errors.category_id ? 'is-invalid' : ''"></v-select>
+                      <div class="col-md-10 mb-2">
+                        <v-select
+                                  :options="configs.categories"
+                                  v-model="formData.category_id"
+                                  :class="errors.category_id ? 'is-invalid' : ''"
+                                  :reduce="category => category.id"
+                        ></v-select>
                       </div>
                       <!-- tạo nhanh loại sản phẩm-->
                       <div class="col-md-2 text-right">
@@ -60,6 +65,7 @@
                           <div class="form-group">
                             <label>Tên</label>
                             <input type="text" class="form-control" v-model="formCat.name">
+                            <span class="text-danger" v-if="errors.cat_name" v-html="errors.cat_name"></span>
                           </div>
                           <div class="form-group text-right">
                             <button class="btn btn-success" @click="createProductCategory()">Lưu</button>
@@ -72,7 +78,30 @@
                   </div>
                   <div class="col-md-6 col-sm-12">
                     <label  class="form-label">Đơn vị</label>
-                    <v-select :options="configs.units" v-model="formData.unit"></v-select>
+                    <div class="row">
+                      <v-select class="col-md-10 mb-2"
+                                :options="configs.units"
+                                v-model="formData.unit"
+                                :reduce="unit => unit.code"
+                      ></v-select>
+                      <!-- tạo nhanh đơn vị sản phẩm-->
+                      <div class="col-md-2 text-right">
+                        <button type="button" class="btn btn-primary" id="popover-button-unit">+</button>
+                        <b-popover target="popover-button-unit" triggers="focus" :show.sync="popoverUnit">
+                          <template #title>Tạo nhanh</template>
+                          <div class="form-group">
+                            <label>Tên</label>
+                            <input type="text" class="form-control" v-model="formUnit.name">
+                            <span class="text-danger" v-if="errors.unit_name" v-html="errors.unit_name"></span>
+                          </div>
+                          <div class="form-group text-right">
+                            <button class="btn btn-success" @click="createProductUnit()">Lưu</button>
+                          </div>
+                        </b-popover>
+                      </div>
+                      <!-- end tạo nhanh đơn vị sản phẩm-->
+                    </div>
+
                   </div>
                   <div class="col-md-6 col-sm-12">
                     <label  class="form-label">Giá nhập <i class="text-danger">*</i></label>
@@ -119,10 +148,10 @@
                 <div class="row detail-box-image">
                   <div v-for="(img,index) in productImages" class="col-3">
                     <label>
-                      <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" :id="'popover-detail-'+index"></b-img-lazy>
+                      <b-img-lazy   :src="getImageUrl(img)" :alt="img" :id="'popover-detail-'+index"></b-img-lazy>
                       <input type="radio" v-model="formData.details[key].image" :id="'detailImage'+index+key" :value="img">
                       <b-popover :target="'popover-detail-'+index" triggers="hover" placement="top">
-                        <b-img-lazy  v-bind="mainProps" :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
+                        <b-img-lazy   :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
                       </b-popover>
                     </label>
                   </div>
@@ -130,15 +159,21 @@
               </div>
               <div class="col-md-3 col-sm-12">
                 <label  class="form-label">Trạng thái</label>
-                <v-select :options="configs.status" v-model="formData.details[key].status"></v-select>
+                <select v-model="formData.details[key].status" class="form-control">
+                  <option v-for="(status,key) in configs.status" :value="key">{{status}}</option>
+                </select>
               </div>
               <div class="col-md-3 col-sm-12">
                 <label class="form-label">Màu sắc</label>
-                <v-select :options="configs.colors" v-model="formData.details[key].color"></v-select>
+                <select v-model="formData.details[key].color" class="form-control">
+                  <option v-for="(color,key) in configs.colors" :value="key">{{color}}</option>
+                </select>
               </div>
               <div class="col-md-3 col-sm-12">
                 <label class="form-label">Size</label>
-                <v-select :options="configs.sizes" v-model="formData.details[key].size"></v-select>
+                <select v-model="formData.details[key].size" class="form-control">
+                  <option v-for="(size,key) in configs.sizes" :value="key">{{size}}</option>
+                </select>
               </div>
             </div>
             <div class="row">
@@ -223,21 +258,24 @@
         category_id:null,
         details:[]
       },
-      mainProps:{
-        blankColor: '#bbb',
-      },
       productImages: [],
       errors:{
         name:null,
         price_import:null,
         price:null,
         images:null,
-        category_id:null
+        category_id:null,
+        cat_name:null,
+        unit_name:null
       },
       formCat:{
         name:''
       },
-      popover:false
+      popover:false,
+      formUnit:{
+        name:''
+      },
+      popoverUnit:false
     }
   },
   methods:{
@@ -392,8 +430,29 @@
           vm.configs.categories = res.data
           vm.formCat.name = null
           vm.formCat.slug = null
+          vm.errors.cat_name = null
         }
-      })
+      }).catch(function (error) {
+        if(error.response && error.response.data && error.response.data.errors) {
+            vm.errors.cat_name = error.response.data.errors.name
+        }
+      });
+    },
+    createProductUnit(){
+      const vm = this
+      const formUnit = vm.formUnit
+      axios.post('/manager/san-pham/don-vi/tao-moi',formUnit).then(function (res){
+        if (res.data){
+          vm.popoverUnit = false
+          vm.configs.units = res.data.data
+          vm.formUnit.name = null
+          vm.errors.unit_name = null
+        }
+      }).catch(function (error) {
+        if(error.response && error.response.data && error.response.data.errors) {
+          vm.errors.unit_name = error.response.data.errors.name
+        }
+      });
     }
   }
 }

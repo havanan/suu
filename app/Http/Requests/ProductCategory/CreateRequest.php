@@ -27,15 +27,17 @@ class CreateRequest extends FormRequest
     {
         return [
                 'name' => 'required|min:5|max:190|unique:product_category',
+                'slug' => 'min:5|max:190|unique:product_category'
         ];
     }
     public function messages()
     {
         return [
                 'required' => 'Trường này không được để trống',
-                'name.unique' => 'Tên đã tồn tại, vui lòng nhập đường dẫn khác',
+                'name.unique' => 'Tên đã tồn tại, vui lòng nhập tên khác',
                 'slug.unique' => 'Seo Url đã tồn tại, vui lòng nhập đường dẫn khác',
                 'min' => 'Trường này phải lớn hơn :min',
+                'max' => 'Trường này phải nhỏ hơn hoặc bằng hơn :max',
         ];
     }
 

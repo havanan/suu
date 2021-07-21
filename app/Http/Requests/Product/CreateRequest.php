@@ -31,7 +31,7 @@ class CreateRequest extends FormRequest
             'price_import' => 'required|min:0|numeric',
             'price' => 'required|min:0|numeric',
             'images' => 'required|array',
-            'category_id' => 'required|numeric'
+            'category_id' => 'required'
         ];
     }
     public function messages()

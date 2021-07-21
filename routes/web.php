@@ -43,7 +43,6 @@ Route::prefix('manager')->group(function (){
                     'prefix' => 'don-vi'
             ],function (){
                 Route::get('/',          [ProductUnitController::class,'index'])->name('product_unit.index');
-                Route::get('tao-moi',    [ProductUnitController::class,'create'])->name('product_unit.create');
                 Route::get('sua/{id}',   [ProductUnitController::class,'edit'])->name('product_unit.edit');
                 Route::get('xoa/{id}',   [ProductUnitController::class,'delete'])->name('product_unit.delete');
                 Route::get('get-list',   [ProductUnitController::class,'getList'])->name('product_unit.getList');

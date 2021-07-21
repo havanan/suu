@@ -9,5 +9,8 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    public function child(){
+        return $this->hasMany(Product::class,'parent_id','id');
+    }
 
 }
