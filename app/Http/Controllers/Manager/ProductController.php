@@ -39,7 +39,9 @@ class ProductController extends Controller
         return view('manager.product.create');
     }
     public function delete($id){
-
+        $ids = $this->productService->getChildIds($id);
+        $this->productService->delete($ids);
+        return $this->productService->getList([]);
     }
     public function getProperty(){
         $globals = new ResponsesApi();
@@ -77,5 +79,8 @@ class ProductController extends Controller
             ->map(function ($file) {
                 return $file->getRelativePathname();
             });
+    }
+    public function getInfo($id){
+        return $this->productService->getInfo($id,true);
     }
 }

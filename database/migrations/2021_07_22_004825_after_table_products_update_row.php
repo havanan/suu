@@ -14,11 +14,11 @@ class AfterTableProductsUpdateRow extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal('price',15,2)->change();
-            $table->decimal('price_discount',15,2)->nullable()->after('price');
-            $table->decimal('price_import',15,2)->nullable()->after('price_discount');
+            $table->decimal('price',15,0)->change();
+            $table->decimal('price_discount',15,0)->nullable()->after('price');
+            $table->decimal('price_import',15,0)->nullable()->after('price_discount');
             $table->tinyInteger('color')->nullable()->after('expiration');
-            $table->tinyInteger('size')->nullable()->after('expiration');
+            $table->string('size')->nullable()->after('expiration');
 
         });
     }

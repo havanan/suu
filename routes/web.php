@@ -36,6 +36,7 @@ Route::prefix('manager')->group(function (){
             Route::get('media',   [ProductController::class,'mediaList'])->name('product.mediaList');
             Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
             Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
+            Route::get('info/{id}',  [ProductController::class,'getInfo'])->name('product.getInfo');
             Route::post('upload-image', [ProductController::class,'uploadImage'])->name('product.uploadImage');
             Route::post('cap-nhat', [ProductController::class,'update'])->name('product.update');
             Route::post('tao-moi',  [ProductController::class,'save'])->name('product.save');

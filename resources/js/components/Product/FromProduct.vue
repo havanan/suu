@@ -172,7 +172,7 @@
               <div class="col-md-3 col-sm-12">
                 <label class="form-label">Size</label>
                 <select v-model="formData.details[key].size" class="form-control">
-                  <option v-for="(size,key) in configs.sizes" :value="key">{{size}}</option>
+                  <option v-for="size in configs.sizes" :value="size">{{size}}</option>
                 </select>
               </div>
             </div>

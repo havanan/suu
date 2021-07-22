@@ -131,4 +131,38 @@ class ProductService extends BaseService
         ]);
         return $stock_product;
     }
+    public function getInfo($id,$isChild = false){
+        $data['info'] = $this->repository->findById($id);
+        $childs = null;
+        if ($isChild){
+            $childs = $this->repository->getList(['parent_id' => $id])->get();
+        }
+        $data['childs'] = $childs;
+        return $data;
+    }
+    public function getChildIds($parent_id){
+        $result = [(int)$parent_id];
+        $ids = $this->repository->getChildIds($parent_id);
+        if (count($ids) > 0) {
+            $result = array_unique(array_merge($result,$ids));
+        }
+      return $result;
+    }
+    public function delete(array $ids)
+    {
+        DB::beginTransaction();
+        try {
+            //xóa sản phẩm
+            $this->repository->delete($ids);
+            //xóa kho
+            $this->stockProduct->deleteWhereIn('product_id',$ids);
+            //xóa số lượng
+            $this->productAmount->deleteWhereIn('product_id',$ids);
+            DB::commit();
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+        }
+    }
 }
