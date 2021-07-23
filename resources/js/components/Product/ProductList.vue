@@ -40,8 +40,8 @@
       <template #cell(price)="data">
         <div v-html="getPrice(data.item)"></div>
       </template>
-      <template #cell(total)="data">
-        <p class="badge text-white shadow-sm w-100" :class="data.value <=2 ? 'bg-gradient-bloody' : 'bg-gradient-quepal'">{{data.value}}</p>
+      <template #cell(stocks_sum_total)="data">
+        <p class="badge text-white shadow-sm w-50" :class="data.value <=2 ? 'bg-gradient-bloody' : 'bg-gradient-quepal'">{{data.value}}</p>
       </template>
 
       <template #cell(action)="data">
@@ -106,7 +106,7 @@
                   <div v-html="getPrice(child)"></div>
                 </td>
                 <td>
-                  <p class="badge text-white shadow-sm w-100" :class="child.total <=2 ? 'bg-gradient-bloody' : 'bg-gradient-quepal'">{{child.total}}</p>
+                  <p class="badge text-white shadow-sm w-100" :class="child.stocks_sum_total <=2 ? 'bg-gradient-bloody' : 'bg-gradient-quepal'">{{child.stocks_sum_total}}</p>
                 </td>
                 <td>
                   <p>{{child.status}}</p>
@@ -177,7 +177,7 @@ export default {
           label: 'Loại'
         },
         {
-          key: 'total',
+          key: 'stocks_sum_total',
           label: 'Tồn kho',
         },
         {

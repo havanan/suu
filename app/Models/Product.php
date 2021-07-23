@@ -12,7 +12,7 @@ class Product extends Model
     public function child(){
         return $this->hasMany(Product::class,'parent_id','id');
     }
-    public function total(){
-        return $this->hasOne(StockProduct::class,'product_id','id');
+    public function stocks(){
+        return $this->hasMany(StockProduct::class,'product_id','id');
     }
 }
