@@ -15,4 +15,7 @@ class ProductCategory extends Model
     {
         return $this->hasMany(ProductCategory::class,'parent_id','id')->select('id as code','name as label','slug','parent_id');
     }
+    public function parent(){
+        return $this->belongsTo(ProductCategory::class,'parent_id');
+    }
 }

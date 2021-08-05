@@ -38,7 +38,7 @@
               <div class="col-md-6 col-sm-12">
                 <div class="mb-3">
                   <label for="inputProductTitle" class="form-label">Tên sản phẩm <i class="text-danger">*</i></label>
-                  <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="getProductSlug()" >
+                  <input type="text" class="form-control" :class="errors.name ? 'is-invalid' : '' " id="inputProductTitle" placeholder="Nhập tên sản phẩm" v-model="formData.name" @change="getProductSlug()">
                   <span class="text-danger" v-if="errors.name">{{errors.name}}</span>
                 </div>
                 <div class="mb-3">
@@ -322,7 +322,6 @@
       vm.formData.slug = vm.makeSlug(vm.formData.name)
     },
     makeSlug(name){
-      const vm = this
       let slug = ''
       //Đổi chữ hoa thành chữ thường
       slug = name.toLowerCase();

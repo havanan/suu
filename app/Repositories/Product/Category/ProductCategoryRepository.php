@@ -17,7 +17,11 @@ class ProductCategoryRepository extends BaseBaseRepository implements ProductCat
     }
     public function getList($params)
     {
-        return $this->getModel()->paginate(10);
+        $data =  $this->model->with(['children','parent'])->orderBy('id','desc');
+        if (isset($params['keyword'])){
+            $data = $data->where('name','like','%'.$params['keyword'].'%');
+        }
+        return $data;
     }
     public function getAll(){
         return DB::table('product_category as c1')
@@ -34,5 +38,12 @@ class ProductCategoryRepository extends BaseBaseRepository implements ProductCat
                         as label")
             ->where('c1.status',Globals::ACTIVE)
             ->get();
+    }
+    public function getParents() {
+        return $this->model->orderBy('id','desc')
+                ->whereNull('parent_id')
+                ->orWhere('parent_id',0)
+                ->select('id','name','slug','parent_id','status')
+                ->get();
     }
 }

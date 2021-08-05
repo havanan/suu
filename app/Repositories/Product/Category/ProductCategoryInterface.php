@@ -10,4 +10,5 @@ interface ProductCategoryInterface extends BaseRepositoryInterface
 {
     public function getList($params);
     public function getAll();
+    public function getParents();
 }

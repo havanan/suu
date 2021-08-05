@@ -29,17 +29,17 @@ Route::prefix('manager')->group(function (){
         Route::group([
             'prefix' => 'san-pham'
         ],function (){
-            Route::get('/',         [ProductController::class,'index'])->name('product.list');
-            Route::get('get-list',  [ProductController::class,'getList'])->name('product.getList');
+            Route::get('/',             [ProductController::class,'index'])->name('product.list');
+            Route::get('get-list',      [ProductController::class,'getList'])->name('product.getList');
             Route::get('get-property',  [ProductController::class,'getProperty'])->name('product.getProperty');
-            Route::get('tao-moi',   [ProductController::class,'create'])->name('product.create');
-            Route::get('media',   [ProductController::class,'mediaList'])->name('product.mediaList');
-            Route::get('sua/{id}',  [ProductController::class,'edit'])->name('product.edit');
-            Route::get('xoa/{id}',  [ProductController::class,'delete'])->name('product.delete');
-            Route::get('info/{id}',  [ProductController::class,'getInfo'])->name('product.getInfo');
+            Route::get('tao-moi',       [ProductController::class,'create'])->name('product.create');
+            Route::get('media',         [ProductController::class,'mediaList'])->name('product.mediaList');
+            Route::get('sua/{id}',      [ProductController::class,'edit'])->name('product.edit');
+            Route::get('xoa/{id}',      [ProductController::class,'delete'])->name('product.delete');
+            Route::get('info/{id}',     [ProductController::class,'getInfo'])->name('product.getInfo');
             Route::post('upload-image', [ProductController::class,'uploadImage'])->name('product.uploadImage');
-            Route::post('cap-nhat', [ProductController::class,'update'])->name('product.update');
-            Route::post('tao-moi',  [ProductController::class,'save'])->name('product.save');
+            Route::post('cap-nhat',     [ProductController::class,'update'])->name('product.update');
+            Route::post('tao-moi',      [ProductController::class,'save'])->name('product.save');
             Route::group([
                     'prefix' => 'don-vi'
             ],function (){
@@ -54,40 +54,42 @@ Route::prefix('manager')->group(function (){
         Route::group([
             'prefix' => 'loai-san-pham'
         ],function (){
-            Route::get('/',         [ProductCategoryController::class,'index'])->name('product_category.index');
-            Route::get('xoa/{id}',  [ProductCategoryController::class,'delete'])->name('product_category.delete');
-            Route::post('cap-nhat', [ProductCategoryController::class,'update'])->name('product_category.update');
-            Route::post('tao-moi',   [ProductCategoryController::class,'save'])->name('product_category.save');
+            Route::get('/',               [ProductCategoryController::class,'index'])->name('product_category.index');
+            Route::get('get-list',        [ProductCategoryController::class,'getList'])->name('product_category.getList');
+            Route::get('xoa/{id}',        [ProductCategoryController::class,'delete'])->name('product_category.delete');
+            Route::get('get-parents',     [ProductCategoryController::class,'getParents'])->name('product_category.getParents');
+            Route::post('cap-nhat',       [ProductCategoryController::class,'update'])->name('product_category.update');
+            Route::post('tao-moi',        [ProductCategoryController::class,'save'])->name('product_category.save');
 
         });
         Route::group([
             'prefix' => 'nhan-vien'
         ],function (){
-            Route::get('/',         [UserController::class,'index'])->name('user.index');
-            Route::get('tao-moi',   [UserController::class,'index'])->name('user.create');
-            Route::get('sua/{id}',  [UserController::class,'edit'])->name('user.edit');
-            Route::get('xoa/{id}',  [UserController::class,'delete'])->name('user.delete');
+            Route::get('/',                [UserController::class,'index'])->name('user.index');
+            Route::get('tao-moi',          [UserController::class,'index'])->name('user.create');
+            Route::get('sua/{id}',         [UserController::class,'edit'])->name('user.edit');
+            Route::get('xoa/{id}',         [UserController::class,'delete'])->name('user.delete');
             Route::get('nhom-tai-khoan',   [UserController::class,'group'])->name('user.group');
-            Route::get('quyen',   [UserController::class,'role'])->name('user.role');
-            Route::get('get-owner',   [UserController::class,'getOwner'])->name('user.get_owner');
-            Route::post('cap-nhat', [UserController::class,'update'])->name('user.update');
-            Route::post('tao-moi',  [UserController::class,'save'])->name('user.save');
+            Route::get('quyen',            [UserController::class,'role'])->name('user.role');
+            Route::get('get-owner',        [UserController::class,'getOwner'])->name('user.get_owner');
+            Route::post('cap-nhat',        [UserController::class,'update'])->name('user.update');
+            Route::post('tao-moi',         [UserController::class,'save'])->name('user.save');
         });
         Route::group([
             'prefix' => 'kho'
         ],function (){
-            Route::get('/',         [StockController::class,'index'])->name('stock.list');
-            Route::get('get-list',         [StockController::class,'getList']);
-            Route::get('sua/{id}',  [StockController::class,'edit'])->name('stock.edit');
-            Route::get('nhap-hang', [StockController::class,'import'])->name('stock.import');
-            Route::get('phieu-nhap-hang', [StockController::class,'importList'])->name('stock.import_list');
-            Route::get('xuat-hang', [StockController::class,'export'])->name('stock.export');
-            Route::get('phieu-xuat-hang', [StockController::class,'exportList'])->name('stock.export_list');
-            Route::get('ton-kho', [StockController::class,'available'])->name('stock.available');
-            Route::get('get-config',   [StockController::class,'getConfig'])->name('user.get_config');
-            Route::get('xoa/{id}',  [StockController::class,'delete']);
-            Route::post('sua/{id}', [StockController::class,'update']);
-            Route::post('tao-moi',  [StockController::class,'save']);
+            Route::get('/',                 [StockController::class,'index'])->name('stock.list');
+            Route::get('get-list',          [StockController::class,'getList']);
+            Route::get('sua/{id}',          [StockController::class,'edit'])->name('stock.edit');
+            Route::get('nhap-hang',         [StockController::class,'import'])->name('stock.import');
+            Route::get('phieu-nhap-hang',   [StockController::class,'importList'])->name('stock.import_list');
+            Route::get('xuat-hang',         [StockController::class,'export'])->name('stock.export');
+            Route::get('phieu-xuat-hang',   [StockController::class,'exportList'])->name('stock.export_list');
+            Route::get('ton-kho',           [StockController::class,'available'])->name('stock.available');
+            Route::get('get-config',        [StockController::class,'getConfig'])->name('user.get_config');
+            Route::get('xoa/{id}',          [StockController::class,'delete']);
+            Route::post('sua/{id}',         [StockController::class,'update']);
+            Route::post('tao-moi',          [StockController::class,'save']);
         });
         Route::group([
             'prefix' => 'don-hang'

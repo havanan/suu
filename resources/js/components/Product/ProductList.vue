@@ -45,13 +45,13 @@
       </template>
 
       <template #cell(action)="data">
-        <button class="btn btn-outline-primary" @click="editProduct(data.item)">
+        <button class="btn btn-outline-primary mb-2" @click="editProduct(data.item)">
           <i class="bx bx-pencil me-0"></i>
         </button>
-        <button class="btn btn-outline-success" @click="toggleDetails(data.item)">
+        <button class="btn btn-outline-success mb-2" @click="toggleDetails(data.item)">
           <i class="bx bx-info-square me-0"></i>
         </button>
-        <button class="btn btn-outline-danger" @click="deleteProduct(data.item)">
+        <button class="btn btn-outline-danger mb-2" @click="deleteProduct(data.item)">
           <i class="bx bx-trash me-0"></i>
         </button>
       </template>
@@ -76,7 +76,7 @@
           <table class="table table-bordered">
             <thead>
             <tr>
-              <th>Id</th>
+              <th>Mã Sp</th>
               <th></th>
               <th>Size</th>
               <th>Màu</th>
@@ -112,10 +112,10 @@
                   <p>{{child.status}}</p>
                 </td>
                 <td>
-                  <button class="btn btn-outline-primary" @click="editProduct(child)">
+                  <button class="btn btn-outline-primary mb-2" @click="editProduct(child)">
                     <i class="bx bx-pencil me-0"></i>
                   </button>
-                  <button class="btn btn-outline-danger" @click="deleteProduct(child)">
+                  <button class="btn btn-outline-danger mb-2" @click="deleteProduct(child)">
                     <i class="bx bx-trash me-0"></i>
                   </button>
                 </td>
