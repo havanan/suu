@@ -131,73 +131,75 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-12">
+      <div  class="col-lg-12">
         <div class="border border-3 p-4 rounded">
-          <div class="row">
-            <div class="col-md-9 col-sm-12">
-              <h3>Thuộc tính sản phẩm</h3>
-            </div>
-            <div class="col-md-3 col-sm-12">
-              <h4 class="text-danger">Tiền nhập: {{vnPriceFormat(formData.price_total)}}</h4>
-            </div>
-          </div>
-          <template v-for="(detail,key) in formData.details">
-            <div class="row mb-3">
+          <template v-if="action==='create'">
+            <div class="row">
+              <div class="col-md-9 col-sm-12">
+                <h3>Thuộc tính sản phẩm</h3>
+              </div>
               <div class="col-md-3 col-sm-12">
-                <label  class="form-label">Ảnh</label>
-                <div class="row detail-box-image">
-                  <div v-for="(img,index) in productImages" class="col-3">
-                    <label>
-                      <b-img-lazy   :src="getImageUrl(img)" :alt="img" :id="'popover-detail-'+index"></b-img-lazy>
-                      <input type="radio" v-model="formData.details[key].image" :id="'detailImage'+index+key" :value="img">
-                      <b-popover :target="'popover-detail-'+index" triggers="hover" placement="top">
-                        <b-img-lazy   :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
-                      </b-popover>
-                    </label>
+                <h4 class="text-danger">Tiền nhập: {{vnPriceFormat(formData.price_total)}}</h4>
+              </div>
+            </div>
+            <template v-for="(detail,key) in formData.details">
+              <div class="row mb-3">
+                <div class="col-md-3 col-sm-12">
+                  <label  class="form-label">Ảnh</label>
+                  <div class="row detail-box-image">
+                    <div v-for="(img,index) in productImages" class="col-3">
+                      <label>
+                        <b-img-lazy   :src="getImageUrl(img)" :alt="img" :id="'popover-detail-'+index"></b-img-lazy>
+                        <input type="radio" v-model="formData.details[key].images" :id="'detailImage'+index+key" :value="img">
+                        <b-popover :target="'popover-detail-'+index" triggers="hover" placement="top">
+                          <b-img-lazy   :src="getImageUrl(img)" :alt="img" class="img-product"></b-img-lazy>
+                        </b-popover>
+                      </label>
+                    </div>
                   </div>
                 </div>
+                <div class="col-md-3 col-sm-12">
+                  <label  class="form-label">Trạng thái</label>
+                  <select v-model="formData.details[key].status" class="form-control">
+                    <option v-for="(status,key) in configs.status" :value="key">{{status}}</option>
+                  </select>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label class="form-label">Màu sắc</label>
+                  <select v-model="formData.details[key].color" class="form-control">
+                    <option v-for="(color,key) in configs.colors" :value="key">{{color}}</option>
+                  </select>
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label class="form-label">Size</label>
+                  <select v-model="formData.details[key].size" class="form-control">
+                    <option v-for="size in configs.sizes" :value="size">{{size}}</option>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-3 col-sm-12">
-                <label  class="form-label">Trạng thái</label>
-                <select v-model="formData.details[key].status" class="form-control">
-                  <option v-for="(status,key) in configs.status" :value="key">{{status}}</option>
-                </select>
-              </div>
-              <div class="col-md-3 col-sm-12">
-                <label class="form-label">Màu sắc</label>
-                <select v-model="formData.details[key].color" class="form-control">
-                  <option v-for="(color,key) in configs.colors" :value="key">{{color}}</option>
-                </select>
-              </div>
-              <div class="col-md-3 col-sm-12">
-                <label class="form-label">Size</label>
-                <select v-model="formData.details[key].size" class="form-control">
-                  <option v-for="size in configs.sizes" :value="size">{{size}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-3 col-sm-12">
-                <label class="form-label">Số lượng</label>
-                <input type="number" min="0" v-model="formData.details[key].total" class="form-control" @change="updateTotal()">
-              </div>
-              <div class="col-md-3 col-sm-12">
-                <label  class="form-label">Giá nhập</label>
-                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_import" @change="updateTotal()">
-              </div>
-              <div class="col-md-3 col-sm-12">
-                <label  class="form-label">Giá bán</label>
-                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price">
-              </div>
-              <div class="col-md-3 col-sm-12">
-                <label  class="form-label">Giá khuyến mại</label>
-                <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_discount">
-              </div>
-              <div class="col-12 text-right mt-3">
-                <button class="btn btn-danger" @click="removeDetail(detail)"> <b-icon icon="trash-fill" aria-hidden="true"></b-icon></button>
-              </div>
+              <div class="row">
+                <div class="col-md-3 col-sm-12">
+                  <label class="form-label">Số lượng</label>
+                  <input type="number" min="0" v-model="formData.details[key].total" class="form-control" @change="updateTotal()" :readonly="action === 'create' ? false : true">
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label  class="form-label">Giá nhập</label>
+                  <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_import" @change="updateTotal()">
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label  class="form-label">Giá bán</label>
+                  <input type="number" min="0" class="form-control"  v-model="formData.details[key].price">
+                </div>
+                <div class="col-md-3 col-sm-12">
+                  <label  class="form-label">Giá khuyến mại</label>
+                  <input type="number" min="0" class="form-control"  v-model="formData.details[key].price_discount">
+                </div>
+                <div class="col-12 text-right mt-3">
+                  <button class="btn btn-danger" @click="removeDetail(detail)"> <b-icon icon="trash-fill" aria-hidden="true"></b-icon></button>
+                </div>
 
-            </div>
+              </div>
+            </template>
           </template>
           <div class="row mt-3 mb-3">
             <div class="col-12 text-right">
@@ -223,7 +225,14 @@
   mounted() {
     this.getProductProperty()
     this.getAllProductImage()
+    this.getProductInfo()
   },
+    // watch:{
+    //   'formData.price_import': function  (val){
+    //     console.log(val)
+    //     this.updateTotal()
+    //   }
+    // },
   data: function () {
     return {
       dropzoneOptions: {
@@ -275,7 +284,8 @@
       formUnit:{
         name:''
       },
-      popoverUnit:false
+      popoverUnit:false,
+      action:'create'
     }
   },
   methods:{
@@ -352,7 +362,13 @@
     },
     pushData(){
       const vm = this
-      axios.post('/manager/san-pham/tao-moi',vm.formData).then(function (res) {
+      let url = '/manager/san-pham/tao-moi';
+      const formData = vm.formData;
+      if (vm.action === 'edit') {
+        url = '/manager/san-pham/cap-nhat';
+        formData.id = this.id;
+      }
+      axios.post(url,formData).then(function (res) {
         console.log(res)
         console.log('done')
       }).catch(function (error) {
@@ -393,7 +409,6 @@
           if(details[i].total) {
             const itemTotal = parseInt(details[i].total)
             const itemPrice = parseInt(details[i].price_import)
-
             total += itemTotal
             priceTotal += (itemTotal * itemPrice)
           }
@@ -452,7 +467,20 @@
           vm.errors.unit_name = error.response.data.errors.name
         }
       });
-    }
+    },
+    async getProductInfo(){
+    const vm = this
+      if(!vm.id){
+        vm.action = 'create';
+        return false
+      }
+      vm.action = 'edit';
+      const res = await axios.get('/manager/san-pham/info/'+vm.id);
+      if(res.data && res.data.info) {
+        vm.formData = res.data.info
+        vm.updateTotal();
+      }
+    },
   }
 }
 </script>

@@ -9,7 +9,11 @@ class Globals
         'Hồng','Xanh','Vàng','Trắng','Đen'
     ];
     const SIZES =  [
-        'S','M','L','XL','XXL',59,66,73,80,90
+        'S' => 'S','M' => 'M','L' => 'L',
+            'XL' => 'XL','XXL' =>'XXL',
+            '59'=>'59','66' => '66',
+            '73' => '73','80' => '80',
+            '90' => '90'
     ];
     const PRODUCT_STATUS = ['Ngừng kinh doanh','Kinh doanh'];
     const CURRENT_PAGE = 1;

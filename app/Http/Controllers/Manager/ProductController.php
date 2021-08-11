@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Manager;
 use App\Helpers\ResponsesApi;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\CreateRequest;
+use App\Http\Requests\Product\UpdateRequest;
 use App\Http\Requests\Product\UploadImageRequest;
 use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
@@ -35,8 +36,13 @@ class ProductController extends Controller
     public function edit($id){
         return view('manager.product.create',compact('id'));
     }
-    public function update(CreateRequest $request){
-        return view('manager.product.create');
+    public function update(UpdateRequest $request){
+        $id = $request->get('id');
+        $params = [
+                'category_id' => $request->get('category_id');
+
+        ];
+        return $this->productService->update($id,$params);
     }
     public function delete($id){
         $ids = $this->productService->getChildIds($id);
@@ -81,6 +87,6 @@ class ProductController extends Controller
             });
     }
     public function getInfo($id){
-        return $this->productService->getInfo($id,true);
+        return $this->productService->getInfo($id,false);
     }
 }

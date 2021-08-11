@@ -14,6 +14,7 @@ use App\Repositories\Product\Unit\ProductUnitInterface;
 use App\Repositories\Stock\Product\StockProductInterface;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ProductService extends BaseService
 {
@@ -84,13 +85,51 @@ class ProductService extends BaseService
             // something went wrong
         }
     }
+    public function update($id, array $data)
+    {
+        $info = $this->repository->findById($id);
+        if (!$info){
+            return  resFail('Không có thông tin sản phẩm');
+        }
+        DB::beginTransaction();
+        try {
+            $this->repository->update($id,$data);
+
+            $price = $data['price'];
+            $price_discount = $data['price_discount'];
+            $price_import = $data['price_import'];
+
+            if ($info->price != $price || $info->price_discount != $price_discount || $info->price_import != $price_import){
+                $this->priceHistory->create([
+                        'price' => $price,
+                        'price_discount' => $price_discount,
+                        'price_import' => $price_import,
+                        'product_id' => $id
+                ]);
+            }
+            DB::commit();
+            return  resSuccess('Cập nhật thành công');
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return  resFail('Cập nhật thất bại');
+        }
+    }
+
     function createProduct($params){
         $price = isset($params['price']) ? $params['price'] : null;
         $price_discount = isset($params['price_discount']) ? $params['price_discount'] : null;
         $price_import = isset($params['price_import']) ? $params['price_import'] : null;
+        $size = isset($params['size']) ? $params['size'] : null;
+        $color = isset($params['color']) ? $params['color'] : null;
+        $name =  isset($params['name']) ? $params['name'] : null;
+        $slug = isset($params['slug']) && $params['slug']  != null ? $params['slug'] : Str::slug($name,'-');
+        $name .= ' '.$size.' '.$color;
+        $slug .= '-'.$size.'-'.$color;
         $productParams = [
-                'name' =>  isset($params['name']) ? $params['name'] : null,
-                'slug' =>  isset($params['slug']) ? $params['slug'] : null,
+                'name' =>  $name,
+                'slug' =>  $slug,
                 'description' =>  isset($params['description']) ? $params['description'] : null,
                 'category_id' =>  isset($params['category_id']) ? $params['category_id'] : null,
                 'price' => $price,
@@ -100,8 +139,8 @@ class ProductService extends BaseService
                 'type' => isset($params['type']) ? $params['type'] : Globals::PRODUCT,
                 'status' => isset($params['status']) ? $params['status'] : Globals::ACTIVE,
                 'parent_id' => isset($params['parent_id']) ? $params['parent_id'] : null,
-                'color' => isset($params['color']) ? $params['color'] : null,
-                'size' => isset($params['size']) ? $params['size'] : null,
+                'color' => $color,
+                'size' => $size,
         ];
         //lưu sản phẩm
         $product = $this->repository->create($productParams);
@@ -132,12 +171,16 @@ class ProductService extends BaseService
         return $stock_product;
     }
     public function getInfo($id,$isChild = false){
-        $data['info'] = $this->repository->findById($id);
+        $info = $this->repository->findById($id);
+//        if ($info->image != null) {
+//            $info->image = json_decode($info->image,true);
+//        }
         $childs = null;
         if ($isChild){
-            $childs = $this->repository->getList(['parent_id' => $id])->get();
+            $info['details'] = $this->repository->getList(['parent_id' => $id])->get();
         }
-        $data['childs'] = $childs;
+        $data['info'] = $info;
+//        $data['childs'] = $childs;
         return $data;
     }
     public function getChildIds($parent_id){

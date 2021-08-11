@@ -73,6 +73,12 @@
             size="xl">
       <div class="row">
         <div class="container-fluid">
+          <h5>Thông tin chi tiết</h5>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9"></div>
+          </div>
+          <h5>Thuộc tính sản phẩm</h5>
           <table class="table table-bordered">
             <thead>
             <tr>
