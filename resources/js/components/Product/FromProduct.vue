@@ -227,12 +227,6 @@
     this.getAllProductImage()
     this.getProductInfo()
   },
-    // watch:{
-    //   'formData.price_import': function  (val){
-    //     console.log(val)
-    //     this.updateTotal()
-    //   }
-    // },
   data: function () {
     return {
       dropzoneOptions: {
@@ -261,7 +255,6 @@
         price_total:0,
         description:'',
         images:[],
-        imageRemove:[],
         status:null,
         unit:null,
         category_id:null,
@@ -331,35 +324,6 @@
       const vm = this
       vm.formData.slug = vm.makeSlug(vm.formData.name)
     },
-    makeSlug(name){
-      let slug = ''
-      //Đổi chữ hoa thành chữ thường
-      slug = name.toLowerCase();
-
-      //Đổi ký tự có dấu thành không dấu
-      slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
-      slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
-      slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
-      slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
-      slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
-      slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
-      slug = slug.replace(/đ/gi, 'd');
-      //Xóa các ký tự đặt biệt
-      slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
-      //Đổi khoảng trắng thành ký tự gạch ngang
-      slug = slug.replace(/ /gi, "-");
-      //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
-      //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
-      slug = slug.replace(/\-\-\-\-\-/gi, '-');
-      slug = slug.replace(/\-\-\-\-/gi, '-');
-      slug = slug.replace(/\-\-\-/gi, '-');
-      slug = slug.replace(/\-\-/gi, '-');
-      //Xóa các ký tự gạch ngang ở đầu và cuối
-      slug = '@' + slug + '@';
-      slug = slug.replace(/\@\-|\-\@|\@/gi, '');
-      return slug
-
-    },
     pushData(){
       const vm = this
       let url = '/manager/san-pham/tao-moi';
@@ -369,12 +333,11 @@
         formData.id = this.id;
       }
       axios.post(url,formData).then(function (res) {
-        console.log(res)
-        console.log('done')
+       if (res && res.status === 200 ){
+         window.location.href = '/manager/san-pham'
+       }
       }).catch(function (error) {
-        if(error.response && error.response.data && error.response.data.errors) {
-            vm.errors = error.response.data.errors
-        }
+        vm.errors = vm.getErrMsg(error)
       });
     },
     resetForm(){
@@ -390,7 +353,6 @@
         total:0,
         description:'',
         images:[],
-        imageRemove:[],
         status:0,
         unit:null,
         category_id:null,
@@ -404,7 +366,7 @@
       const details = vm.formData.details
       let total = 0
       let priceTotal = 0;
-      if(details.length > 0 ) {
+      if(details && details.length > 0 ) {
         for (let i = 0; i < details.length;i++ ) {
           if(details[i].total) {
             const itemTotal = parseInt(details[i].total)
@@ -447,9 +409,7 @@
           vm.errors.cat_name = null
         }
       }).catch(function (error) {
-        if(error.response && error.response.data && error.response.data.errors) {
-            vm.errors.cat_name = error.response.data.errors.name
-        }
+        vm.errors = vm.getErrMsg(error)
       });
     },
     createProductUnit(){
@@ -463,9 +423,7 @@
           vm.errors.unit_name = null
         }
       }).catch(function (error) {
-        if(error.response && error.response.data && error.response.data.errors) {
-          vm.errors.unit_name = error.response.data.errors.name
-        }
+        vm.errors = vm.getErrMsg(error)
       });
     },
     async getProductInfo(){
@@ -476,8 +434,8 @@
       }
       vm.action = 'edit';
       const res = await axios.get('/manager/san-pham/info/'+vm.id);
-      if(res.data && res.data.info) {
-        vm.formData = res.data.info
+      if(res.data && res.data) {
+        vm.formData = res.data
         vm.updateTotal();
       }
     },

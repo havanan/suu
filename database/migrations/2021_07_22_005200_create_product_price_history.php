@@ -16,9 +16,9 @@ class CreateProductPriceHistory extends Migration
         Schema::create('product_price_histories', function (Blueprint $table) {
             $table->id();
             $table->integer('product_id');
-            $table->double('price');
-            $table->double('price_discount')->nullable();
-            $table->double('price_import')->nullable();
+            $table->decimal('price',15,0);
+            $table->decimal('price_discount',15,0)->nullable();
+            $table->decimal('price_import',15,0)->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
         });

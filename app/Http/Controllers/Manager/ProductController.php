@@ -10,6 +10,7 @@ use App\Http\Requests\Product\UploadImageRequest;
 use App\Services\Product\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -38,9 +39,27 @@ class ProductController extends Controller
     }
     public function update(UpdateRequest $request){
         $id = $request->get('id');
+        $newImages = $request->get('images');
+        $name = $request->get('name');
+        $slug = $request->get('slug');
+        $size = $request->get('size');
+        $color = $request->get('color');
+        $name .= ' '.$size.' '.$color;
+        $slug = $slug != null ? $slug : Str::slug($name,'-');
         $params = [
-                'category_id' => $request->get('category_id');
-
+                'name' => $name,
+                'slug' => $slug,
+                'description' =>$request->get('description'),
+                'status' =>$request->get('status'),
+                'price' =>$request->get('price'),
+                'price_discount' =>$request->get('price_discount'),
+                'price_import' =>$request->get('price_import'),
+                'category_id' =>$request->get('category_id'),
+                'parent_id' =>$request->get('parent_id'),
+                'size' =>$size,
+                'color' =>$color,
+                'unit' =>$request->get('unit'),
+                'image' => $newImages != null ? json_encode($newImages) : null
         ];
         return $this->productService->update($id,$params);
     }
@@ -87,6 +106,6 @@ class ProductController extends Controller
             });
     }
     public function getInfo($id){
-        return $this->productService->getInfo($id,false);
+        return $this->productService->getInfo($id,true);
     }
 }

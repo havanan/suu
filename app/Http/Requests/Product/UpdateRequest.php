@@ -30,7 +30,7 @@ class UpdateRequest extends FormRequest
 //                'slug' => 'unique:products',
                 'price_import' => 'required|min:0|numeric',
                 'price' => 'required|min:0|numeric',
-                'image' => 'required',
+                'images' => 'required|array',
                 'category_id' => 'required'
         ];
     }

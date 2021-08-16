@@ -74,9 +74,23 @@
       <div class="row">
         <div class="container-fluid">
           <h5>Thông tin chi tiết</h5>
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-9"></div>
+          <div class="row mb-3">
+            <div class="col-md-3">
+              <img :src="getImg(detail.image)">
+            </div>
+            <div class="col-md-5">
+              <h4><strong>{{detail.name}}</strong></h4>
+              <p>Seo Url: {{detail.slug}}</p>
+              <p>Giá nhập: <strong class="text-primary">{{numberFormat(detail.price_import)}} vnđ</strong></p>
+              <p v-if="detail.price_discount > 0">Giá bán: <del class="text-danger"><strong>{{numberFormat(detail.price)}} vnđ</strong></del>
+                <strong class="text-success">{{numberFormat(detail.price_discount)}} vnđ</strong>
+              </p>
+              <p v-else> <strong class="text-success">{{numberFormat(detail.price)}} vnđ</strong></p>
+              <p>Tổng sản phẩm: {{detail.total}}</p>
+            </div>
+            <div class="col-md-4">
+              <div v-html="detail.description"></div>
+            </div>
           </div>
           <h5>Thuộc tính sản phẩm</h5>
           <table class="table table-bordered">
@@ -93,8 +107,8 @@
               <th></th>
             </tr>
             </thead>
-            <tbody v-if="detail.childs">
-              <tr v-for="child in detail.childs">
+            <tbody v-if="detail.details">
+              <tr v-for="child in detail.details">
                 <td>{{child.id}}</td>
                 <td>
                   <img :src="getImg(child.image)" width="100px" />
@@ -193,8 +207,6 @@ export default {
       ],
       items: [],
       detail: {
-        info:{},
-        childs:[]
       },
       isShowModal: false
     }

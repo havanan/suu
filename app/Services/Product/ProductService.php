@@ -88,22 +88,22 @@ class ProductService extends BaseService
     public function update($id, array $data)
     {
         $info = $this->repository->findById($id);
+
         if (!$info){
             return  resFail('Không có thông tin sản phẩm');
         }
         DB::beginTransaction();
         try {
             $this->repository->update($id,$data);
-
             $price = $data['price'];
             $price_discount = $data['price_discount'];
             $price_import = $data['price_import'];
 
             if ($info->price != $price || $info->price_discount != $price_discount || $info->price_import != $price_import){
-                $this->priceHistory->create([
-                        'price' => $price,
-                        'price_discount' => $price_discount,
-                        'price_import' => $price_import,
+              $abc = $this->priceHistory->create([
+                        'price' => (int) $price,
+                        'price_discount' =>(int) $price_discount,
+                        'price_import' =>(int) $price_import,
                         'product_id' => $id
                 ]);
             }
@@ -124,9 +124,8 @@ class ProductService extends BaseService
         $size = isset($params['size']) ? $params['size'] : null;
         $color = isset($params['color']) ? $params['color'] : null;
         $name =  isset($params['name']) ? $params['name'] : null;
-        $slug = isset($params['slug']) && $params['slug']  != null ? $params['slug'] : Str::slug($name,'-');
         $name .= ' '.$size.' '.$color;
-        $slug .= '-'.$size.'-'.$color;
+        $slug = isset($params['slug']) && $params['slug']  != null ? $params['slug'] : Str::slug($name,'-');
         $productParams = [
                 'name' =>  $name,
                 'slug' =>  $slug,
@@ -141,6 +140,7 @@ class ProductService extends BaseService
                 'parent_id' => isset($params['parent_id']) ? $params['parent_id'] : null,
                 'color' => $color,
                 'size' => $size,
+                'unit' => isset($params['unit']) ? $params['unit'] : null,
         ];
         //lưu sản phẩm
         $product = $this->repository->create($productParams);
@@ -172,16 +172,11 @@ class ProductService extends BaseService
     }
     public function getInfo($id,$isChild = false){
         $info = $this->repository->findById($id);
-//        if ($info->image != null) {
-//            $info->image = json_decode($info->image,true);
-//        }
         $childs = null;
         if ($isChild){
             $info['details'] = $this->repository->getList(['parent_id' => $id])->get();
         }
-        $data['info'] = $info;
-//        $data['childs'] = $childs;
-        return $data;
+        return $info;
     }
     public function getChildIds($parent_id){
         $result = [(int)$parent_id];

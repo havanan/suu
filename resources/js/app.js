@@ -1,6 +1,5 @@
 
 import Vue from 'vue';
-// import Notifications from 'vue-notification';
 import ProductList from "./components/Product/ProductList";
 import FromProduct from "./components/Product/FromProduct";
 import UnitList from "./components/Product/Unit/UnitList";
@@ -9,20 +8,18 @@ import CategoryList from "./components/Product/Category/CategoryList";
 import vue2Dropzone from 'vue2-dropzone';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import VSelect from 'vue-select';
-// import VueToastr from "vue-toastr";
+import VueToast from 'vue-toast-notification';
+import {myMixin} from './mixin';
 
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import 'vue2-dropzone/dist/vue2Dropzone.min.css';
+
+Vue.mixin(myMixin);
 
 require('./bootstrap');
 window.Vue = require('vue').default;
-// Vue.use(Notifications);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-// Vue.use(VueToastr, {
-//     /* OverWrite Plugin Options if you need */
-// });
+Vue.use(VueToast);
+
 //product
 Vue.component('ProductList',ProductList);
 Vue.component('FromProduct',FromProduct);
